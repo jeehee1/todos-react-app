@@ -1,5 +1,6 @@
 import React from "react";
-import TodoList from "./components/TodoList";
+import Todos from "./components/Todos";
+import TodosList from "./components/TodosList";
 
 function App() {
   const DUMMY_TODOS = [
@@ -11,7 +12,7 @@ function App() {
   return (
     <div>
       <h1>Todo List!</h1>
-      <TodoList todos={DUMMY_TODOS}/>
+      <Todos todos={DUMMY_TODOS}/>
     </div>
   );
 }

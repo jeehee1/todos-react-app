@@ -1,6 +1,6 @@
 import TodoItem from "./TodoItem";
 
-const TodoList = (props) => {
+const TodosList = (props) => {
   return (
     <div>
       <ul>
@@ -12,4 +12,4 @@ const TodoList = (props) => {
   );
 };
 
-export default TodoList;
+export default TodosList;
