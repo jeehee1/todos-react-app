@@ -10,7 +10,7 @@ const TodosList = (props) => {
     <div className={classes}>
       <ul>
         {todosCtx.todos.map((todo) => (
-          <TodoItem todoItem={todo} />
+          <TodoItem todoItem={todo} onRemoveTodo={todosCtx.removeTodo.bind(null, todo.id)}/>
         ))}
       </ul>
     </div>

@@ -4,10 +4,5 @@
     list-style: none;
     border: 2px solid hsl(192, 74%, 34%);
     margin: 1rem auto;
-}
-
-.list p {
-    margin: 1rem;
-    padding: 0;
-    font: inherit;
+    padding: 1rem;
 }
