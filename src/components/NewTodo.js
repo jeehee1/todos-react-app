@@ -1,5 +1,6 @@
 import { useContext, useRef } from "react";
 import { TodosContext } from "../context/todos-context";
+import classes from "./NewTodo.module.css";
 
 const NewTodo = () => {
   const todosCtx = useContext(TodosContext);
@@ -16,11 +17,24 @@ const NewTodo = () => {
   };
 
   return (
-    <form onSubmit={submitTodoHandler}>
+    <form onSubmit={submitTodoHandler} className={classes.form}>
       <label htmlFor="todoText">New Todo</label>
-      <input type="date" name="todoDate" ref={enteredTodoDate} />
-      <input type="text" id="todoText" name="todoText" ref={enteredTodoText} />
-      <button>Add Todo</button>
+      <input
+        className={classes.date}
+        type="date"
+        name="todoDate"
+        ref={enteredTodoDate}
+      />
+      <input
+        className={classes.text}
+        type="text"
+        id="todoText"
+        name="todoText"
+        ref={enteredTodoText}
+      />
+      <div className={classes.addbutton}>
+        <button>Add Todo</button>
+      </div>
     </form>
   );
 };
