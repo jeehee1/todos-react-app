@@ -1,4 +1,3 @@
-
 export async function getAllTodos() {
   const response = await fetch(
     "https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos.json"
@@ -6,7 +5,7 @@ export async function getAllTodos() {
   const data = await response.json();
 
   if (!response.ok) {
-    console.log('get all todos error')
+    console.log("get all todos error");
     return;
   }
 
@@ -23,8 +22,9 @@ export async function getAllTodos() {
 }
 
 export async function addTodo(todoText, todoDate) {
-  const status = false;
+  let status = false;
   const todoData = { text: todoText, date: todoDate };
+  console.log(todoData);
 
   const response = await fetch(
     "https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos.json",
@@ -34,12 +34,13 @@ export async function addTodo(todoText, todoDate) {
       headers: { "Content-Type": "application/json" },
     }
   );
-  const data= await response.json();
+  const data = await response.json();
 
-  if(!response.ok) {
-    console.log('add todo error');
+  if (!response.ok) {
+    console.log("add todo error");
     return;
   }
+  console.log(data);
 
   status = true;
   return status;

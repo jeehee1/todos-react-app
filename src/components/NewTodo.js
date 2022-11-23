@@ -1,9 +1,8 @@
-import { useContext, useRef } from "react";
-import { TodosContext } from "../context/todos-context";
+import { useRef } from "react";
 import classes from "./NewTodo.module.css";
+import { addTodo } from "../lib/api";
 
 const NewTodo = () => {
-  const todosCtx = useContext(TodosContext);
   const enteredTodoText = useRef();
   const enteredTodoDate = useRef();
 
@@ -13,7 +12,7 @@ const NewTodo = () => {
     const newTodoText = enteredTodoText.current.value;
     const newTodoDate = enteredTodoDate.current.value;
 
-    todosCtx.addTodo(newTodoDate, newTodoText);
+    addTodo(newTodoText, newTodoDate);
   };
 
   return (
