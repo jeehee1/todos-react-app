@@ -1,3 +1,4 @@
+import { response } from "express";
 import React, { useContext, useState } from "react";
 
 export const TodosContext = React.createContext({
@@ -7,17 +8,13 @@ export const TodosContext = React.createContext({
 });
 
 const TodosContextProvider = (props) => {
-  const [todos, setTodos] = useState([
-    { id: "t1", date: "2022-11-30", text: "First todo" },
-    { id: "t2", date: "2022-11-30", text: "Second todo" },
-    { id: "t3", date: "2022-11-29", text: "Third todo" },
-  ]);
+  const [todos, setTodos] = useState(transformedTodosList);
 
-  const addTodoHandler = (todoDate, todoText) => {
-    const newTodo = { id: Math.random(), date: todoDate, text: todoText };
+  const addTodoHandler = async (todoDate, todoText) => {
+    const todoData = { date: todoDate, text: todoText };
 
     setTodos((prevTodos) => {
-      return prevTodos.concat(newTodo);
+      return prevTodos.concat(todoData);
     });
   };
 
