@@ -45,3 +45,10 @@ export async function addTodo(todoText, todoDate) {
   status = true;
   return status;
 }
+
+export async function deleteTodo(todoId) {
+  const respone = await fetch(
+    `https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos/${todoId}.json`,
+    { method: "DELETE" }
+  );
+}
