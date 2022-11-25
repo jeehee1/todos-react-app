@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export async function getAllTodos() {
   const response = await fetch(
     "https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos.json"
@@ -9,16 +11,17 @@ export async function getAllTodos() {
     return;
   }
 
-  const allTodos = [];
+  const transforedTodos = [];
 
   for (const key in data) {
     const todoObj = {
       id: key,
       ...data[key],
     };
-    allTodos.push(todoObj);
+    transforedTodos.push(todoObj);
   }
-  return allTodos;
+
+  return transforedTodos;
 }
 
 export async function addTodo(todoText, todoDate) {
@@ -51,4 +54,11 @@ export async function deleteTodo(todoId) {
     `https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos/${todoId}.json`,
     { method: "DELETE" }
   );
+
+  if (!respone.ok) {
+    console.log("delete todo error");
+    return;
+  }
+
+  return;
 }

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import classes from "./NewTodo.module.css";
 import { addTodo } from "../lib/api";
 
-const NewTodo = () => {
+const NewTodo = (props) => {
   const enteredTodoText = useRef();
   const enteredTodoDate = useRef();
 
@@ -12,7 +12,8 @@ const NewTodo = () => {
     const newTodoText = enteredTodoText.current.value;
     const newTodoDate = enteredTodoDate.current.value;
 
-    addTodo(newTodoText, newTodoDate);
+    props.addTodo(newTodoText, newTodoDate);
+
   };
 
   return (
