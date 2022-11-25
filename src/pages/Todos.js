@@ -1,7 +1,7 @@
-import TodosList from "./TodosList";
+import TodosList from "../components/TodosList";
 import classes from "./Todos.module.css";
 import { Fragment, useEffect, useState } from "react";
-import NewTodo from "./NewTodo";
+import NewTodo from "../components/NewTodo";
 import { addTodo, deleteTodo, getAllTodos } from "../lib/api";
 
 const Todos = (props) => {

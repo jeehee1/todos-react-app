@@ -1,16 +1,11 @@
-import NewTodo from "./components/NewTodo";
-import Todos from "./components/Todos";
-import TodosContextProvider from "./context/todos-context";
-import TodosList from "./components/TodosList";
-import { addTodo } from "./lib/api";
-import { useState } from "react";
+import Todos from "./pages/Todos";
+import { Route, Routes } from "react-router-dom";
 
-function App(props) {
-
+function App() {
   return (
-    <TodosContextProvider>
-      <Todos />
-    </TodosContextProvider>
+    <Routes>
+      <Route path="/todos" element={<Todos />} />
+    </Routes>
   );
 }
 
