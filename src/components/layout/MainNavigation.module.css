@@ -1,0 +1,29 @@
+.header {
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5db5b7;
+}
+
+.logo {
+    font: inherit;
+    font-weight: bold;
+    font-size: 2rem;
+    display:flexbox;
+}
+
+.nav {
+    display: flex;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav li {
+    margin: 1rem
+}
