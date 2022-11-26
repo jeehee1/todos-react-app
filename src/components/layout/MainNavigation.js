@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import classes from './MainNavigation.module.css'
 
 const MainNavigation = () => {
@@ -6,8 +7,12 @@ const MainNavigation = () => {
             <div className={classes.logo}>Planner</div>
             <nav className={classes.nav}>
                 <ul className={classes.menu}>
-                    <li>Todos</li>
-                    <li>Diets</li>
+                    <li>
+                        <Link to='/todos'>Todos</Link>
+                    </li>
+                    <li>
+                        <Link to='diets'>Diets</Link>
+                    </li>
                 </ul>
             </nav>
         </header>
