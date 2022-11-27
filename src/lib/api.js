@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export async function getAllTodos() {
+export async function getAllTodos(isOrdered) {
   const response = await fetch(
     "https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos.json"
   );

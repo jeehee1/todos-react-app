@@ -7,7 +7,8 @@ import classes from "./TodosList.module.css";
 const TodosList = (props) => {
 
   return (
-    <div className={classes}>
+    <div className={classes.list}>
+      <button className={classes.button} onClick={props.onOrderRecently}>Ascending Todo</button>
       <ul>
         {props.allTodos.map((todo) => (
           <TodoItem

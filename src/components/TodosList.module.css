@@ -1,3 +1,15 @@
-ul {
+.list {
+    display: block;
+    width: 40rem;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+}
+
+.list ul {
     padding: 0
+}
+
+.button {
+    padding: 0.6rem;
 }

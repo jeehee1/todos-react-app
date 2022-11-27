@@ -15,19 +15,16 @@
     font-size: 2rem;
 }
 
-.nav {
-    display: flex;
-}
-
 .nav ul {
     list-style: none;
     display: flex;
+    margin: 0;
+    padding: 0;
 }
 
 .nav li {
-    font-size: 1.1rem;
     font-weight: bold;
-    margin: 1rem;
+    margin-left: 1rem;
     padding: 1rem;
     background-color: #5a7b7b;
     border: solid 1px #5a7b7b;
@@ -36,6 +33,9 @@
 }
 
 .nav a {
+    font-size: 1.1rem;
+    padding: 1rem;
+
     text-decoration: none;
     color: #dbdbdb;
 }
@@ -45,4 +45,3 @@
 .nav a.active {
     color: #9f9f9f
 }
-

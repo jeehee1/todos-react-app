@@ -1,8 +1,6 @@
 .list {
-    display: block;
-    width: 40rem;
     list-style: none;
     border: 2px solid hsl(192, 74%, 34%);
-    margin: 1rem auto;
+    margin-bottom: 1rem;
     padding: 1rem;
 }
