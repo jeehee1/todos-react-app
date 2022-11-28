@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
-import { TodosContext } from "../context/todos-context";
-import { deleteTodo } from "../lib/api";
+import { deleteTodo } from "../../lib/api";
 import classes from "./TodoItem.module.css";
 
 const TodoItem = (props) => {
