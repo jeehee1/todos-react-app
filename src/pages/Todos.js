@@ -5,13 +5,11 @@ import NewTodo from "../components/NewTodo";
 import { addTodo, deleteTodo, getAllTodos } from "../lib/api";
 
 const orderedTodos = (todos, isOrdered) => {
-  return todos.sort((todoA, todoB) => {
-    if (isOrdered) {
-      return todoA.date > todoB.date ? 1 : -1;
-    } else {
-      return todoA.date < todoB.date ? 1 : -1;
-    }
-  });
+  return isOrdered
+    ? todos.concat().sort((todoA, todoB) => {
+        return todoA.date > todoB.date ? 1 : -1;
+      })
+    : todos;
 };
 
 const Todos = (props) => {
@@ -35,6 +33,10 @@ const Todos = (props) => {
     setOrderedRecently(true);
   };
 
+  const orderByDateHandler = () => {
+    setOrderedRecently(false);
+  };
+
   const addTodoHandler = async (todoText, todoDate) => {
     await addTodo(todoText, todoDate);
     getTodos();
@@ -53,6 +55,8 @@ const Todos = (props) => {
         allTodos={orderedAllTodos}
         onDeleteTodo={deleteTodoHandler}
         onOrderRecently={orderRecentlyHandler}
+        onOrderByDate={orderByDateHandler}
+        isOrderedRecently={orderedRecently}
       />
     </Fragment>
   );

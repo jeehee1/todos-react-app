@@ -12,4 +12,9 @@
 
 .button {
     padding: 0.6rem;
+    background-color: #41885a;
+    border: 1px solid #41885a;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
 }

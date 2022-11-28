@@ -13,7 +13,6 @@ const NewTodo = (props) => {
     const newTodoDate = enteredTodoDate.current.value;
 
     props.addTodo(newTodoText, newTodoDate);
-
   };
 
   return (
