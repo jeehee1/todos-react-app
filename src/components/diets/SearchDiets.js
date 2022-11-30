@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 
-const NewDiet = () =>{
+const SearchDiets = () =>{
     return (<Fragment>
         <input type="date"/>
     </Fragment>)
 }
 
-export default NewDiet;
+export default SearchDiets;
