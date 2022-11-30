@@ -7,7 +7,6 @@ const SearchDiet = (props) => {
   const searchDietsHandler = (event) => {
     event.preventDefault();
     dietCtx.storeWeek(searchWeek.current.value);
-    console.log('search diet')
   };
 
   return (

@@ -19,7 +19,7 @@ for (const key in DUMMY_DIET) {
 }
 
 export const DietContext = React.createContext({
-  diet: transformedTodos,
+  diet: {},
   week: "",
   storeWeek: (week) => {},
 });
@@ -34,13 +34,9 @@ const DietContextProvider = (props) => {
   };
 
   if (searchWeek !== "") {
-    console.log("search week is valid");
-    console.log(transformedTodos);
-    console.log(searchWeek)
     weeklyFilteredDiet = transformedTodos.filter(
       (diet) => diet.id === searchWeek
-    );
-    console.log(weeklyFilteredDiet);
+    )[0];
   }
 
   const contextValue = {
