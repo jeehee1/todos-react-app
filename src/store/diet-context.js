@@ -7,7 +7,7 @@ const DUMMY_DIET = {
   },
   "2022-W47": {
     Mon: { Breakfast: "Pancakes", Lunch: "Cheese Toastie" },
-    Wed: { Dinner: "Chicken Salad" },
+    Tue: { Dinner: "Chicken Salad" },
   },
 };
 

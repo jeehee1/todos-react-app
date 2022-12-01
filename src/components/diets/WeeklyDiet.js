@@ -1,21 +1,30 @@
 import { Fragment, useContext } from "react";
 import { DietContext } from "../../store/diet-context";
 import SearchDiet from "./SearchDiet";
+import DailyDiet from "./DailyDiet";
 
 const WeeklyDiet = () => {
   const dietCtx = useContext(DietContext);
-  console.log(dietCtx.diet);
+  const weeklyDiet = dietCtx.diet;
+  console.log(weeklyDiet);
+  const dailyDiet = [];
+  for (const key in weeklyDiet) {
+    if (key !== "id") {
+      const dietObj = { date: key, ...weeklyDiet[key] };
+      dailyDiet.push(dietObj);
+    }
+  }
+
+  console.log(dailyDiet);
   return (
     <Fragment>
       <SearchDiet />
       <p>2022/11/4주차</p>
-      <div>Mon</div>
-      <div>Tue</div>
-      <div>Wed</div>
-      <div>Thur</div>
-      <div>Fri</div>
-      <div>Sat</div>
-      <div>Sun</div>
+      <ul>
+        {dailyDiet.map((diet) => (
+          <DailyDiet diet={diet}>{diet.date}</DailyDiet>
+        ))}
+      </ul>
     </Fragment>
   );
 };
