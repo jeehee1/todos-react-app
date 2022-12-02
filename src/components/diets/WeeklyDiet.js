@@ -22,7 +22,7 @@ const WeeklyDiet = () => {
       <p>2022/11/4주차</p>
       <ul>
         {dailyDiet.map((diet) => (
-          <DailyDiet diet={diet}>{diet.date}</DailyDiet>
+          <DailyDiet diet={diet}/>
         ))}
       </ul>
     </Fragment>
