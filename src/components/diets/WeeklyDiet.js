@@ -6,7 +6,7 @@ import DailyDiet from "./DailyDiet";
 const WeeklyDiet = () => {
   const dietCtx = useContext(DietContext);
   const weeklyDiet = dietCtx.diet;
-  console.log(weeklyDiet);
+  console.log('WeeklyDiet componenet' + weeklyDiet);
   const dailyDiet = [];
   for (const key in weeklyDiet) {
     if (key !== "id") {
