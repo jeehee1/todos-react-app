@@ -1,4 +1,11 @@
 .mealitem h4 {
-    font: inherit;
-    font-weight: bold;
+  font: inherit;
+  font-weight: bold;
+}
+
+.mealitem p {
+  display: block;
+  border: solid 1px black;
+  height: 4rem;
+  text-align: center;
 }

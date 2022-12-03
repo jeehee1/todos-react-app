@@ -1,3 +1,5 @@
+import classes from './WeeklyDiet.module.css'
+
 import { Fragment, useContext } from "react";
 import { DietContext } from "../../store/diet-context";
 import SearchDiet from "./SearchDiet";
@@ -19,8 +21,8 @@ const WeeklyDiet = () => {
   return (
     <Fragment>
       <SearchDiet />
-      <p>2022/11/4주차</p>
-      <ul>
+      <p className={classes.week}>2022/11/4주차</p>
+      <ul className={classes.list}>
         {dailyDiet.map((diet) => (
           <DailyDiet diet={diet}/>
         ))}
