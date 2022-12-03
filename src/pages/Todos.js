@@ -1,5 +1,4 @@
 import TodosList from "../components/todos/TodosList";
-import classes from "./Todos.module.css";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import NewTodo from "../components/todos/NewTodo";
 import { addTodo, deleteTodo, getAllTodos } from "../lib/api";
@@ -49,7 +48,7 @@ const Todos = (props) => {
 
   return (
     <Fragment>
-      <h1 className={classes.title}>Todo List!</h1>
+      <h1>Todo List!</h1>
       <NewTodo addTodo={addTodoHandler} />
       <TodosList
         allTodos={orderedAllTodos}

@@ -1,3 +1,4 @@
+import classes from "./Layout.module.css";
 import { Fragment } from "react";
 import MainNavigation from "./MainNavigation";
 
@@ -5,7 +6,7 @@ const NavLayout = (props) => {
   return (
     <Fragment>
       <MainNavigation />
-      <main>{props.children}</main>
+      <main className={classes.main}>{props.children}</main>
     </Fragment>
   );
 };
