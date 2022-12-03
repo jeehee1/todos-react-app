@@ -1,4 +1,5 @@
 .list {
     list-style: none;
-    font: inherit
+    font: inherit;
+    padding: 0;
 }
