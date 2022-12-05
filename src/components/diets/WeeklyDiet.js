@@ -1,4 +1,4 @@
-import classes from './WeeklyDiet.module.css'
+import classes from "./WeeklyDiet.module.css";
 
 import { Fragment, useContext } from "react";
 import { DietContext } from "../../store/diet-context";
@@ -8,23 +8,27 @@ import DailyDiet from "./DailyDiet";
 const WeeklyDiet = () => {
   const dietCtx = useContext(DietContext);
   const weeklyDiet = dietCtx.diet;
-  console.log('WeeklyDiet componenet' + weeklyDiet);
   const dailyDiet = [];
+  console.log("WeeklyDiet componenet");
+  console.log(weeklyDiet)
+  let dietObj;
   for (const key in weeklyDiet) {
+    const id = weeklyDiet['id'];
     if (key !== "id") {
-      const dietObj = { date: key, ...weeklyDiet[key] };
+      dietObj = { id:id.concat(key), date: key, ...weeklyDiet[key] };
       dailyDiet.push(dietObj);
     }
   }
 
-  console.log(dailyDiet);
+  console.log("dailyDiet");
+  console.log(dailyDiet)
   return (
     <Fragment>
       <SearchDiet />
-      <p className={classes.week}>2022/11/4주차</p>
+      <p className={classes.week}>{'week'}</p>
       <ul className={classes.list}>
         {dailyDiet.map((diet) => (
-          <DailyDiet diet={diet}/>
+          <DailyDiet diet={diet} id={diet.id}/>
         ))}
       </ul>
     </Fragment>
