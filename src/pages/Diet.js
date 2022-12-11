@@ -7,7 +7,6 @@ const Diet = () => {
 
   return (
     <DietContextProvider>
-      <div>Diets plan</div>
       <DailyDiet onSearchDiet={searchDietHandler} />
     </DietContextProvider>
   );

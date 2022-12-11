@@ -48,7 +48,6 @@ const Todos = (props) => {
 
   return (
     <Fragment>
-      <h1>Todo List!</h1>
       <NewTodo addTodo={addTodoHandler} />
       <TodosList
         allTodos={orderedAllTodos}

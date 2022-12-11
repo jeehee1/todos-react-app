@@ -14,7 +14,7 @@ const DailyDiet = () => {
   return (
     <Fragment>
       <SearchDiet />
-      <h3 className={classes.date}>{dietCtx.date||'Please select the date'}</h3>
+      <h3 className={classes.date}>{dietCtx.date+ ' MEAL PLAN'||'Please select the date'}</h3>
       <ul className={classes.list}>
         <li>Breakfast : {dailyDiet ? dailyDiet.Breakfast : "-"}</li>
         <li>Lunch : {dailyDiet ? dailyDiet.Lunch : "-"}</li>

@@ -1,0 +1,35 @@
+.search {
+    /* border: solid 1px black; */
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.3rem;
+    border-radius: 8px;
+    background-color: #eee7e7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.search lable {
+    margin: 1rem;
+}
+
+.search input {
+    border: 1px solid #c2bdbd;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.search button {
+    padding: 0.7rem 1rem;
+    margin: 0 1rem;
+    background-color: #454f58;
+    border: 1px solid #454f58;
+    color: white;
+    border-radius: 4px;
+}
+
+.search button:active,
+.search button:hover {
+    cursor: pointer;
+    background-color: #404e5b;
+    
+}

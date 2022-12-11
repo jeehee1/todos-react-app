@@ -6,10 +6,10 @@
 }
 
 .list li {
-    margin: 1rem;
+    margin: 1rem 0;
     padding: 1rem 2rem;
-    border: 1px solid #cba8a8;
-    background-color: #cba8a8;
+    border: 1px solid #cfb1dd;
+    background-color: #cfb1dd;
     border-radius: 8px;
     font: inherit;
     font-size: 1.1rem;
