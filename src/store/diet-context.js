@@ -1,48 +1,56 @@
 import React, { useState } from "react";
 
 const DUMMY_DIET = {
-  "2022-W45": {
-    Mon: { Breakfast: "English Muffin", Lunch: "Chicken Burger" },
-    Wed: { Breakfast: "Oatmeal", Dinner: "Turkey Sandwich" },
+  "2022-12-13": {
+    Breakfast: "English Muffin",
+    Lunch: "Chicken Burger",
   },
-  "2022-W47": {
-    Mon: { Breakfast: "Pancakes", Lunch: "Cheese Toastie" },
-    Tue: { Dinner: "Chicken Salad" },
+  "2022-12-14": {
+    Breakfast: "Oatmeal",
+    Dinner: "Turkey Sandwich",
   },
+  "2022-12-15": {
+    Breakfast: "Pancakes",
+    Lunch: "Cheese Toastie",
+  },
+  "2022-12-16": { Dinner: "Chicken Salad" },
 };
 
-const transformedTodos = [];
+const transformedDiets = [];
 
 for (const key in DUMMY_DIET) {
   const dietObj = { id: key, ...DUMMY_DIET[key] };
-  transformedTodos.push(dietObj);
+  transformedDiets.push(dietObj);
 }
 
 export const DietContext = React.createContext({
-  diet: {},
-  week: "",
-  storeWeek: (week) => {},
+  diet: [],
+  date: "",
+  storeDate: (date) => {},
 });
 
 const DietContextProvider = (props) => {
-  const [searchWeek, setSearchWeek] = useState("");
+  const [searchDate, setSearchDate] = useState("");
 
-  let weeklyFilteredDiet = null;
+  let dailyFilteredDiet = null;
 
-  const storeSearchWeek = (week) => {
-    setSearchWeek(week);
+  const storeSearchDate = (date) => {
+    setSearchDate(date);
+    console.log("setSearchDate : " + date);
   };
 
-  if (searchWeek !== "") {
-    weeklyFilteredDiet = transformedTodos.filter(
-      (diet) => diet.id === searchWeek
-    )[0];
+  if (searchDate !== "") {
+    dailyFilteredDiet = transformedDiets.filter(
+      (diet) => diet.id === searchDate
+    );
+    console.log(dailyFilteredDiet)
+    console.log("searchDate = " + searchDate);
   }
 
   const contextValue = {
-    diet: weeklyFilteredDiet,
-    week: searchWeek,
-    storeWeek: storeSearchWeek,
+    diet: dailyFilteredDiet,
+    date: searchDate,
+    storeDate: storeSearchDate,
   };
 
   return (

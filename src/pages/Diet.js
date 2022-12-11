@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import WeeklyDiet from "../components/diets/WeeklyDiet";
+import DailyDiet from "../components/diets/DailyDiet";
 import DietContextProvider from "../store/diet-context";
 
 const Diet = () => {
@@ -8,7 +8,7 @@ const Diet = () => {
   return (
     <DietContextProvider>
       <div>Diets plan</div>
-      <WeeklyDiet onSearchDiet={searchDietHandler} />
+      <DailyDiet onSearchDiet={searchDietHandler} />
     </DietContextProvider>
   );
 };

@@ -1,26 +1,27 @@
 import classes from "./DailyDiet.module.css";
 
-const DailyDiet = (props) => {
-  const mealType = ["Breakfast", "Lunch", "Dinner", "Snacks"];
-  const week = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
-  let mealItem;
+import { Fragment, useContext } from "react";
+import { DietContext } from "../../store/diet-context";
+import SearchDiet from "./SearchDiet";
 
-  console.log(props.id)
+const DailyDiet = () => {
+  const dietCtx = useContext(DietContext);
+  const dailyDiet = dietCtx.diet ? dietCtx.diet[0] : null;
+  console.log("dailyDiet componenet");
+  console.log(dailyDiet);
 
+  let dietObj;
   return (
-    <li key={props.id}>
-      {week.map((date) => (
-        <div className={classes.date}>
-          <p>{date}</p>
-          {mealType.map((type) => (
-            <div className={classes.meal}>
-              <h4>{type}</h4>
-              <p>{props.diet[type] || " - "}</p>
-            </div>
-          ))}
-        </div>
-      ))}
-    </li>
+    <Fragment>
+      <SearchDiet />
+      <p className={classes.week}>{"date"}</p>
+      <ul className={classes.list}>
+        <li>Breakfast : {dailyDiet ? dailyDiet.Breakfast : "-"}</li>
+        <li>Lunch : {dailyDiet ? dailyDiet.Lunch : "-"}</li>
+        <li>Dinner : {dailyDiet ? dailyDiet.Dinner : "-"}</li>
+        <li>Snack : {dailyDiet ? dailyDiet.Snack : "-"}</li>
+      </ul>
+    </Fragment>
   );
 };
 

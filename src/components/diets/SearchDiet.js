@@ -3,16 +3,16 @@ import { DietContext } from "../../store/diet-context";
 
 const SearchDiet = (props) => {
   const dietCtx = useContext(DietContext);
-  const searchWeek = useRef();
+  const searchDate = useRef();
   const searchDietsHandler = (event) => {
     event.preventDefault();
-    dietCtx.storeWeek(searchWeek.current.value);
+    dietCtx.storeDate(searchDate.current.value);
   };
 
   return (
     <form onSubmit={searchDietsHandler}>
-      <label htmlFor="week">Week</label>
-      <input type="week" htmlFor="week" ref={searchWeek} />
+      <label htmlFor="date">date</label>
+      <input type="date" htmlFor="date" ref={searchDate} />
       <button>Search</button>
     </form>
   );
