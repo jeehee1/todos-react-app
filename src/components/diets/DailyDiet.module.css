@@ -8,5 +8,7 @@
 .list li {
     margin: 1rem;
     padding: 1rem;
-    border: 1px solid black;
+    border: 1px solid #cba8a8;
+    background-color: #cba8a8;
+    border-radius: 8px;
 }
