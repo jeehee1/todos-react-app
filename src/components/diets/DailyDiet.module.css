@@ -7,8 +7,16 @@
 
 .list li {
     margin: 1rem;
-    padding: 1rem;
+    padding: 1rem 2rem;
     border: 1px solid #cba8a8;
     background-color: #cba8a8;
     border-radius: 8px;
+    font: inherit;
+    font-size: 1.1rem;
+}
+
+.date {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 100;
 }
