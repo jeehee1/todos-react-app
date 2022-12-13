@@ -8,6 +8,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
+.search form {
+    display: inline-block;
+}
+
 .search lable {
     margin: 1rem;
 }
