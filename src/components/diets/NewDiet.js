@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Select from "react-select";
 
 const options = [
@@ -10,11 +10,20 @@ const options = [
 
 const NewDiet = () => {
   const [typeSelect, setTypeSelect] = useState(null);
+  const dateRef = useRef();
+  const mealRef = useRef();
+
+  const dietPlanSubmitHandler = (event) => {
+    event.preventDefault();
+
+    console.log(' dateRef : ' + dateRef.current.value + ' typeSelect : '+typeSelect.value + ' meal : ' + mealRef.current.value)
+    console.log(typeSelect)
+  }
   return (
     <div>
-      <form>
+      <form onSubmit={dietPlanSubmitHandler}>
         <label htmlFor="date">Date</label>
-        <input type="date" id="date" />
+        <input type="date" id="date" ref={dateRef}/>
         <label htmlFor='meal-type'>Meal Type</label>
         <Select
           id='meal-type'
@@ -23,7 +32,7 @@ const NewDiet = () => {
           options={options}
         />
         <label htmlFor="meal">Plan</label>
-        <input type="text" id="meal" />
+        <input type="text" id="meal" ref={mealRef}/>
         <button>Add Plan</button>
       </form>
     </div>
