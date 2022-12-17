@@ -24,14 +24,12 @@ const SearchDiet = (props) => {
         <input type="date" htmlFor="date" ref={searchDate} />
         <button>Search</button>
       </form>
-      <button onClick={addNewDietHandler}>Add Meal Plan</button>
     </Fragment>
   );
 
   return (
     <div className={classes.search}>
-      {!newForm && searchMenu}
-      {newForm && <NewDiet />}
+      {searchMenu}
     </div>
   );
 };

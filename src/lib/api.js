@@ -24,6 +24,29 @@ export async function getAllTodos(isOrdered) {
   return transforedTodos;
 }
 
+export async function addDietPlan(inputDate, inputType, inputMeal) {
+  const newDiet = {};
+  newDiet[inputType] = inputMeal;
+  const response = await fetch(
+    `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${inputDate}/.json`,
+    {
+      method: "POST",
+      body: JSON.stringify(newDiet),
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.log("add diet plan error");
+    return;
+  }
+
+  console.log(newDiet);
+  return;
+}
+
 export async function addTodo(todoText, todoDate) {
   let status = false;
   const todoData = { text: todoText, date: todoDate };
