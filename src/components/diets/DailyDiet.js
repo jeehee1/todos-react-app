@@ -1,38 +1,50 @@
 import classes from "./DailyDiet.module.css";
 
-import { Fragment, useContext } from "react";
-import { DietContext } from "../../store/diet-context";
+import { Fragment } from "react";
 import SearchDiet from "./SearchDiet";
 import NewDiet from "./NewDiet";
 import { useState } from "react";
 
 const DailyDiet = () => {
-  const dietCtx = useContext(DietContext);
+  const [searchedDiet, setSearchedDiet] = useState([]);
+  const [searchDate, setSearchDate] = useState("");
   const [showUpdate, setShowUpdate] = useState(false);
-  const dailyDiet = dietCtx.diet ? dietCtx.diet[0] : null;
   const showUpdateHandler = () => {
     setShowUpdate(true);
   };
-  const closeNewDietHandler = () =>{
+  const closeNewDietHandler = () => {
     setShowUpdate(false);
-  }
+  };
 
-  let dietObj;
+  const searchByDateHandler = (date, diet) => {
+    setSearchDate(date);
+    setSearchedDiet(diet);
+  };
+
+  console.log("searchDiet");
+  console.log(searchedDiet);
   return (
     <Fragment>
-      <SearchDiet />
+      <SearchDiet onSearchByDate={searchByDateHandler} />
       <h3 className={classes.date}>
-        {dietCtx.date + " MEAL PLAN" || "Please select the date"}
-        {dietCtx.date && (
-          <button onClick={showUpdateHandler}>Update Plan</button>
-        )}
+        {searchDate + " MEAL PLAN" || "Please select the date"}
       </h3>
-      {showUpdate && <NewDiet date={dietCtx.date} diet={dietCtx.diet[0]} closeNewDiet={closeNewDietHandler}/>}
+      <button onClick={showUpdateHandler}>Update Plan</button>
+      {showUpdate && (
+        <NewDiet
+          date={searchDate}
+          closeNewDiet={closeNewDietHandler}
+        />
+      )}
       <ul className={classes.list}>
-        <li>Breakfast : {dailyDiet ? dailyDiet.Breakfast : "-"}</li>
-        <li>Lunch : {dailyDiet ? dailyDiet.Lunch : "-"}</li>
-        <li>Dinner : {dailyDiet ? dailyDiet.Dinner : "-"}</li>
-        <li>Snack : {dailyDiet ? dailyDiet.Snack : "-"}</li>
+        {searchedDiet.map((diet) => (
+          <li>
+            <p>
+              {diet.type} - {diet.meal}
+            </p>
+            <button>update</button>
+          </li>
+        ))}
       </ul>
     </Fragment>
   );

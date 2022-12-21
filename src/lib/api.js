@@ -1,5 +1,30 @@
 import { useState } from "react";
 
+export async function getDietPlan(date) {
+  const response = await fetch(
+    `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`
+  );
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.log("get diet plan error");
+    return;
+  }
+
+  const transformedDiet = [];
+
+  for (const key in data) {
+    const dietObj = {
+      id: key,
+      date: date,
+      ...data[key],
+    };
+    transformedDiet.push(dietObj);
+  }
+
+  return transformedDiet;
+}
+
 export async function getAllTodos(isOrdered) {
   const response = await fetch(
     "https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos.json"
@@ -26,9 +51,11 @@ export async function getAllTodos(isOrdered) {
 
 export async function addDietPlan(inputDate, inputType, inputMeal) {
   const newDiet = {};
-  newDiet[inputType] = inputMeal;
+  newDiet["type"] = inputType;
+  newDiet["meal"] = inputMeal;
+  console.log(newDiet);
   const response = await fetch(
-    `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${inputDate}/.json`,
+    `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${inputDate}.json`,
     {
       method: "POST",
       body: JSON.stringify(newDiet),
@@ -73,12 +100,12 @@ export async function addTodo(todoText, todoDate) {
 }
 
 export async function deleteTodo(todoId) {
-  const respone = await fetch(
+  const response = await fetch(
     `https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos/${todoId}.json`,
     { method: "DELETE" }
   );
 
-  if (!respone.ok) {
+  if (!response.ok) {
     console.log("delete todo error");
     return;
   }

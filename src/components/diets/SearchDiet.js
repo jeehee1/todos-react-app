@@ -1,26 +1,23 @@
 import classes from "./SearchDiet.module.css";
 import { Fragment, useContext, useRef, useState } from "react";
-import { DietContext } from "../../store/diet-context";
-import NewDiet from "./NewDiet";
+import { getDietPlan } from "../../lib/api";
 
 const SearchDiet = (props) => {
   const [newForm, setNewForm] = useState(false);
 
-  const dietCtx = useContext(DietContext);
   const searchDate = useRef();
-  const searchDietsHandler = (event) => {
+  
+  const searchDietsHandler = async (event) => {
     event.preventDefault();
-    dietCtx.storeDate(searchDate.current.value);
-  };
-
-  const addNewDietHandler = () => {
-    setNewForm(true);
+    const date = searchDate.current.value;
+    const diet = await getDietPlan(date);
+    props.onSearchByDate(date, diet);
   };
 
   const searchMenu = (
     <Fragment>
       <form onSubmit={searchDietsHandler}>
-        <lable htmlFor="date">Search the date</lable>
+        <label htmlFor="date">Search the date</label>
         <input type="date" htmlFor="date" ref={searchDate} />
         <button>Search</button>
       </form>
