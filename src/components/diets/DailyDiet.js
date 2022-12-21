@@ -29,20 +29,23 @@ const DailyDiet = () => {
       <h3 className={classes.date}>
         {searchDate + " MEAL PLAN" || "Please select the date"}
       </h3>
-      <button onClick={showUpdateHandler}>Update Plan</button>
+      {searchDate && !showUpdate && <button onClick={showUpdateHandler}>Update Plan</button>}
+      {searchDate && showUpdate && (
+        <button onClick={closeNewDietHandler}>Close Form</button>
+      )}
+      {!searchDate && <p>Please search the date for update plan</p>}
+      {!searchedDiet.length && <p>No result</p>}
+
       {showUpdate && (
-        <NewDiet
-          date={searchDate}
-          closeNewDiet={closeNewDietHandler}
-        />
+        <NewDiet date={searchDate} closeNewDiet={closeNewDietHandler} />
       )}
       <ul className={classes.list}>
         {searchedDiet.map((diet) => (
-          <li>
+          <li key={diet.id}>
             <p>
               {diet.type} - {diet.meal}
             </p>
-            <button>update</button>
+            <button>delete</button>
           </li>
         ))}
       </ul>

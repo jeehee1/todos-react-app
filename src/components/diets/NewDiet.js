@@ -40,6 +40,7 @@ const NewDiet = (props) => {
         <label htmlFor="meal">Plan</label>
         <input type="text" id="meal" ref={mealRef} />
         <button>Add Plan</button>
+        <button>close form</button>
       </form>
     </div>
   );
