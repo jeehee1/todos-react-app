@@ -25,16 +25,19 @@ const DailyDiet = () => {
   console.log(searchedDiet);
   return (
     <Fragment>
-      <SearchDiet onSearchByDate={searchByDateHandler} />
+      <SearchDiet onSearchByDate={searchByDateHandler} onShowUpdate={showUpdateHandler} />
       <h3 className={classes.date}>
-        {searchDate + " MEAL PLAN" || "Please select the date"}
+        {searchDate? searchDate + " MEAL PLAN": 'Please search the date first'}
       </h3>
-      {searchDate && !showUpdate && <button onClick={showUpdateHandler}>Update Plan</button>}
+      {/* {searchDate && !showUpdate && (
+        <button onClick={showUpdateHandler}>Update Plan</button>
+      )} */}
       {searchDate && showUpdate && (
         <button onClick={closeNewDietHandler}>Close Form</button>
       )}
-      {!searchDate && <p>Please search the date for update plan</p>}
-      {!searchedDiet.length && <p>No result</p>}
+      {!searchedDiet.length && searchDate && (
+        <p className={classes.empty}>No result</p>
+      )}
 
       {showUpdate && (
         <NewDiet date={searchDate} closeNewDiet={closeNewDietHandler} />
