@@ -3,38 +3,26 @@ import { Fragment, useContext, useRef, useState } from "react";
 import { getDietPlan } from "../../lib/api";
 import { formattedToday } from "../../lib/formattedToday";
 import { useEffect } from "react";
+import getDayOfWeek from "../../lib/getDayOfWeek";
 
 const SearchDiet = (props) => {
-  const [newForm, setNewForm] = useState(false);
-  const [updateBtn, setUpdateBtn] = useState(false);
-
-  const today = formattedToday();
-
-  const searchDate = useRef();
-
-  const searchDietsHandler = async (event) => {
+  const searchWeek = useRef();
+  const submitHandler = (event) => {
     event.preventDefault();
-    if(!searchDate.current.value){
-      return;
-    }
-    const date = searchDate.current.value;
-    const diet = await getDietPlan(date);
-    props.onSearchByDate(date, diet);
-    setUpdateBtn(true);
+    const week = searchWeek.current.value;
+    const startDate = getDayOfWeek(week);
+    props.onSetStartDate(startDate);
+    console.log(startDate)
   };
-
-  const searchMenu = (
+  return (
     <Fragment>
-      <form onSubmit={searchDietsHandler}>
-        <label htmlFor="date">Search the date</label>
-        <input type="date" htmlFor="date" ref={searchDate} />
+      <form onSubmit={submitHandler}>
+        <label htmlFor="week">Search week</label>
+        <input type="week" htmlFor="week" ref={searchWeek} />
         <button>Search</button>
-        {updateBtn && <button onClick={props.onShowUpdate}>Update</button>}
       </form>
     </Fragment>
   );
-
-  return <div className={classes.search}>{searchMenu}</div>;
 };
 
 export default SearchDiet;

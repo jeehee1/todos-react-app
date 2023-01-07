@@ -3,13 +3,14 @@ import Select from "react-select";
 import { addDietPlan } from "../../lib/api";
 
 const options = [
-  { value: "breakfast", label: "Breakfast" },
-  { value: "lunch", label: "Lunch" },
-  { value: "dinner", label: "Dinner" },
-  { value: "snacks", label: "Snacks" },
+  { value: "Breakfast", label: "Breakfast" },
+  { value: "Lunch", label: "Lunch" },
+  { value: "Dinner", label: "Dinner" },
+  { value: "Snacks", label: "Snacks" },
 ];
 
 const NewDiet = (props) => {
+  const date = props.date
   const [typeSelect, setTypeSelect] = useState(null);
   const typeRef = useRef();
   const mealRef = useRef();
