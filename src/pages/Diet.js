@@ -7,15 +7,19 @@ import DietContextProvider from "../store/diet-context";
 
 const Diet = () => {
   const [searchWeek, setSearchWeek] = useState();
+  const [dateOfWeek, setDateOfWeek] = useState([]);
 
   
+  console.log(searchWeek);
+  console.log(dateOfWeek);
 
   return (
     <DietContextProvider>
       <SearchDiet
         date={searchWeek}
-        onSetStartDate={(date) => {
-          setSearchWeek(date);
+        onSetStartDate={(week, date) => {
+          setSearchWeek(week);
+          setDateOfWeek(date);
         }}
       />
       {searchWeek && <WeeklyDiet />}

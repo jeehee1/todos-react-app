@@ -3,16 +3,15 @@ import { Fragment, useContext, useRef, useState } from "react";
 import { getDietPlan } from "../../lib/api";
 import { formattedToday } from "../../lib/formattedToday";
 import { useEffect } from "react";
-import getDayOfWeek from "../../lib/getDayOfWeek";
+import getDateOfWeek from "../../lib/getDayOfWeek";
 
 const SearchDiet = (props) => {
   const searchWeek = useRef();
   const submitHandler = (event) => {
     event.preventDefault();
     const week = searchWeek.current.value;
-    const startDate = getDayOfWeek(week);
-    props.onSetStartDate(startDate);
-    console.log(startDate)
+    const date = getDateOfWeek(week);
+    props.onSetStartDate(week, date);
   };
   return (
     <Fragment>
