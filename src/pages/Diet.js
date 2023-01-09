@@ -9,10 +9,6 @@ const Diet = () => {
   const [searchWeek, setSearchWeek] = useState();
   const [dateOfWeek, setDateOfWeek] = useState([]);
 
-  
-  console.log(searchWeek);
-  console.log(dateOfWeek);
-
   return (
     <DietContextProvider>
       <SearchDiet
@@ -22,7 +18,7 @@ const Diet = () => {
           setDateOfWeek(date);
         }}
       />
-      {searchWeek && <WeeklyDiet />}
+      {searchWeek && <WeeklyDiet date={dateOfWeek}/>}
     </DietContextProvider>
   );
 };

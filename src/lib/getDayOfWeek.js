@@ -15,6 +15,8 @@ function convertDate(date) {
   );
 }
 
+const day = ["MON", "TUE", "WED", "THUR", "FRI", "SAT", "SUN"];
+
 function getDateOfWeek(ISOweek) {
   const y = parseInt(ISOweek.substring(0, 4)); // 2023
   const w = parseInt(ISOweek.substring(6, 8)); // 08
@@ -30,14 +32,17 @@ function getDateOfWeek(ISOweek) {
   }
   const firstDate = convertDate(ISOweekStart);
 
-  const weeklyDate = [firstDate];
+  const day = ["MON", "TUE", "WED", "THUR", "FRI", "SAT", "SUN"];
+  const weeklyDate = [firstDate+day[0]];
 
   for (let i = 0; i < 6; i++) {
     let date = ISOweekStart;
     const changedDate = new Date(date.setDate(date.getDate() + 1));
     const formattedDate = convertDate(changedDate);
-    weeklyDate.push(formattedDate);
+    const dateAndDay = formattedDate + day[i+1];
+    weeklyDate.push(dateAndDay);
   }
+  console.log(weeklyDate)
   return weeklyDate;
 }
 

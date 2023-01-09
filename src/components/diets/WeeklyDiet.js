@@ -1,22 +1,20 @@
 import DailyDiet from "./DailyDiet";
 
-const WeeklyDiet = () => {
-  const DUMMY_DIET = {
-    date: "2023-01-01",
-    day: 'MON',
-    breakfast: "Bagel",
-    lunch: "Pizzas",
-    dinner: "Chicken",
-  };
+const WeeklyDiet = (props) => {
+
+  const dietData = [];
+  const week = props.week;
+  const date = props.date;
+  console.log(date)
 
   return (
     <ul>
-      <li>{DUMMY_DIET.date}  / {DUMMY_DIET.day}{<DailyDiet diet={DUMMY_DIET}/>}</li>
-      <li>Tue</li>
-      <li>Wed</li>
-      <li>Thur</li>
-      <li>Fri</li>
-      <li>Sat</li>
+        <p>{week}</p>
+      {date.map((date) => (
+        <li>
+          <DailyDiet searchWeek={week} searchDate={date}/>
+        </li>
+      ))}
     </ul>
   );
 };
