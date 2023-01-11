@@ -18,7 +18,7 @@ const Diet = () => {
           setDateOfWeek(date);
         }}
       />
-      {searchWeek && <WeeklyDiet date={dateOfWeek}/>}
+      {searchWeek && <WeeklyDiet date={dateOfWeek} week={searchWeek}/>}
     </DietContextProvider>
   );
 };

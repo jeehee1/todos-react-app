@@ -1,18 +1,20 @@
+import { useState } from "react";
 import DailyDiet from "./DailyDiet";
 
 const WeeklyDiet = (props) => {
-
-  const dietData = [];
+  // [{day:..., date: ..., break:..., lunch:..., dinner: ...}, {day:..., date: ..., break:..., lunch:..., dinner: ...}, {day:..., date: ..., break:..., lunch:..., dinner: ...}]
   const week = props.week;
   const date = props.date;
-  console.log(date)
 
   return (
     <ul>
-        <p>{week}</p>
+      <p>{week}</p>
       {date.map((date) => (
         <li>
-          <DailyDiet searchWeek={week} searchDate={date}/>
+          <DailyDiet
+            searchWeek={week}
+            searchDate={date}
+          />
         </li>
       ))}
     </ul>
