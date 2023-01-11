@@ -1,8 +1,7 @@
 import { useRef } from "react";
 
 const UpdateDiet = (props) => {
-  const date = props.date.substring(0, 10);
-  const day = props.date.substring(10, 13);
+  const {key, date, day, breakfast, lunch, dinner, snacks } = props.dietInfo;
   const breakfastRef = useRef();
   const lunchRef = useRef();
   const dinnerRef = useRef();
@@ -19,9 +18,9 @@ const UpdateDiet = (props) => {
     event.preventDefault();
     console.log(newDietData);
     const data = fetch(
-      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`,
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}/${key}.json`,
       {
-        method: "POST",
+        method: "PATCH",
         body: JSON.stringify(newDietData),
         headers: { "Content-Type": "application/json" },
       }
@@ -35,19 +34,19 @@ const UpdateDiet = (props) => {
       .catch((error) => {
         return error;
       });
-      console.log(data);
+    console.log(data);
   };
 
   return (
     <form onSubmit={submitDietHandler}>
       <label htmlFor="breakfast">Breakfast</label>
-      <input type="text" id="breakfast" ref={breakfastRef} />
+      <input type="text" id="breakfast" ref={breakfastRef} value={breakfast}/>
       <label htmlFor="lunch">Lunch</label>
-      <input type="text" id="lunch" ref={lunchRef} />
+      <input type="text" id="lunch" ref={lunchRef} value={lunch}/>
       <label htmlFor="dinner">Dinner</label>
-      <input type="text" id="dinner" ref={dinnerRef} />
+      <input type="text" id="dinner" ref={dinnerRef} value={dinner} />
       <label htmlFor="snacks">Snacks</label>
-      <input type="text" id="snacks" ref={snacksRef} />
+      <input type="text" id="snacks" ref={snacksRef} value={snacks}/>
       <button>save</button>
     </form>
   );

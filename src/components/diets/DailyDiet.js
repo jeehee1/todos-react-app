@@ -61,7 +61,7 @@ const DailyDiet = (props) => {
     <Fragment>
       <p>{date}</p>
       {!showUpdate && dietList}
-      {showUpdate && <UpdateDiet/>}
+      {showUpdate && <UpdateDiet dietInfo={diet} />}
       <form onSubmit={updateDietHandler}>
         <button>Update</button>
       </form>
