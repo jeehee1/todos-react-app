@@ -11,6 +11,7 @@ const SearchDiet = (props) => {
     event.preventDefault();
     const week = searchWeek.current.value;
     const date = getDateOfWeek(week);
+    
     props.onSetStartDate(week, date);
   };
   return (

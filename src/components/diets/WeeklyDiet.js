@@ -10,7 +10,7 @@ const WeeklyDiet = (props) => {
     <ul>
       <p>{week}</p>
       {date.map((date) => (
-        <li>
+        <li key={date}>
           <DailyDiet
             searchWeek={week}
             searchDate={date}

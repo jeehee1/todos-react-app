@@ -10,6 +10,7 @@ const DailyDiet = (props) => {
   const date = props.searchDate.substring(0, 10);
   const day = props.searchDate.substring(10, 13);
   const [diet, setDiet] = useState();
+  const [showUpdate, setShowUpdate] = useState(false);
 
   useEffect(() => {
     if (date !== null) {
@@ -28,13 +29,37 @@ const DailyDiet = (props) => {
     setDiet(null);
   }, [date]);
 
-  console.log(diet);
-
-  const [showUpdate, setShowUpdate] = useState(false);
   const updateDietHandler = (event) => {
     event.preventDefault();
     setShowUpdate(true);
   };
+
+  const saveDietHandler = (newDiet) => {
+    fetch(
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}/${diet.key}.json`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(newDiet),
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+        console.log("responseData");
+        console.log(responseData);
+        setDiet({ date: date, key: diet.key, ...responseData });
+      })
+      .catch((error) => {
+        return error;
+      });
+    setShowUpdate(false);
+  };
+
+  console.log("diet : ");
+  console.log(diet);
+
   const dietList = (
     <div>
       <div>
@@ -60,8 +85,11 @@ const DailyDiet = (props) => {
   return (
     <Fragment>
       <p>{date}</p>
+      <p>{day}</p>
       {!showUpdate && dietList}
-      {showUpdate && <UpdateDiet dietInfo={diet} />}
+      {showUpdate && (
+        <UpdateDiet dietInfo={diet} onSaveDiet={saveDietHandler} />
+      )}
       <form onSubmit={updateDietHandler}>
         <button>Update</button>
       </form>
