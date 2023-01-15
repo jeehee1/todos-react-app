@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 const UpdateDiet = (props) => {
-  const { key, date, day, breakfast, lunch, dinner, snacks } = props.dietInfo;
+  const { day, breakfast, lunch, dinner, snacks } = props.dietInfo;
   const breakfastRef = useRef();
   const lunchRef = useRef();
   const dinnerRef = useRef();
@@ -17,8 +17,7 @@ const UpdateDiet = (props) => {
       dinner: dinnerRef.current.value,
       snacks: snacksRef.current.value,
     };
-    props.onSaveDiet(newDietData, key);
-
+    props.onSaveDiet(newDietData);
   };
 
   return (

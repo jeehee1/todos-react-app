@@ -1,32 +1,35 @@
-.list {
-    list-style: none;
-    font: inherit;
-    padding: 0;
-    
+.box {
+        display: flex;
 }
 
-.list li{
-    margin: 1rem 0;
-    padding: 1rem 2rem;
-    border: 1px solid #cfb1dd;
-    background-color: #cfb1dd;
-    border-radius: 8px;
-    font: inherit;
-    font-size: 1.1rem;
-}
-
-.empty{
-    font-size: 1.2rem;
-    font-weight: bold;
-    border: 2px solid #f8b3b3;
+.head {
+    font-weight: 500;
+    width: 20%;
     text-align: center;
-    padding: 1rem;
+    margin: 1rem;
+}
+
+.info {
+    text-align: center;
+    width: 80%;
+    text-align: center;
+}
+
+.btn {
+    text-align: right;   
+}
+
+.btn button {
+    padding: 0.8rem 1.2rem;
+    background-color: #8eb4a8;
+    border: solid 1px #8eb4a8;
     border-radius: 4px;
+    color: #3d3d3d;
+    font-weight: bold;
+    font-size: 0.9rem;
 }
 
-
-.date {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 100;
+.btn :hover,
+.btn :active {
+    cursor: pointer;
 }
