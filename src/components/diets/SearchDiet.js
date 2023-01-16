@@ -4,6 +4,7 @@ import { getDietPlan } from "../../lib/api";
 import { formattedToday } from "../../lib/formattedToday";
 import { useEffect } from "react";
 import getDateOfWeek from "../../lib/getDayOfWeek";
+import Card from "../../layout/Card";
 
 const SearchDiet = (props) => {
   const searchWeek = useRef();
@@ -15,13 +16,13 @@ const SearchDiet = (props) => {
     props.onSetStartDate(week, date);
   };
   return (
-    <Fragment>
-      <form onSubmit={submitHandler}>
+    <Card>
+      <form className={classes.search} onSubmit={submitHandler}>
         <label htmlFor="week">Search week</label>
         <input type="week" htmlFor="week" ref={searchWeek} />
         <button>Search</button>
       </form>
-    </Fragment>
+    </Card>
   );
 };
 

@@ -1,25 +1,23 @@
 .search {
     /* border: solid 1px black; */
     text-align: center;
-    padding: 1rem;
     font-size: 1.3rem;
-    border-radius: 8px;
-    background-color: #eee7e7;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    display: flexbox;
 }
 
-.search form {
-    display: inline-block;
-}
 
-.search lable {
+.search label{
+    display: block;
     margin: 1rem;
+
 }
 
 .search input {
+    display: block;
     border: 1px solid #c2bdbd;
     padding: 0.5rem 1rem;
     border-radius: 4px;
+    margin: 1.3rem auto;
 }
 
 .search button {
