@@ -1,0 +1,10 @@
+.list {
+    list-style: none;
+    padding: 0;
+}
+
+.week {
+    font-size: 1.4rem;
+    margin: 2rem auto;
+    text-align: center;
+}

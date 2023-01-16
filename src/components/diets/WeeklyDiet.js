@@ -1,3 +1,4 @@
+import classes from './WeeklyDiet.module.css'
 import { useState } from "react";
 import DailyDiet from "./DailyDiet";
 
@@ -8,8 +9,8 @@ const WeeklyDiet = (props) => {
   const [showUpdateBtn, setShowUpdateBtn] = useState(true);
 
   return (
-    <ul>
-      <p>{week}</p>
+    <ul className={classes.list}>
+      <h3 className={classes.week}>{week}</h3>
       {date.map((date) => (
         <li key={date}>
           <DailyDiet

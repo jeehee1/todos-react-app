@@ -96,23 +96,23 @@ const DailyDiet = (props) => {
   const dietList = (
     <Fragment>
       <div className={classes.box}>
-        <h3 className={classes.head}>Breakfast</h3>
+        <h4 className={classes.head}>Breakfast</h4>
         <p className={classes.info}>
           {diet && diet.breakfast ? diet.breakfast : " "}
         </p>
       </div>
       <div className={classes.box}>
-        <h3 className={classes.head}>Lunch</h3>
+        <h4 className={classes.head}>Lunch</h4>
         <p className={classes.info}>{diet && diet.lunch ? diet.lunch : " "}</p>
       </div>
       <div className={classes.box}>
-        <h3 className={classes.head}>Dinner</h3>
+        <h4 className={classes.head}>Dinner</h4>
         <p className={classes.info}>
           {diet && diet.dinner ? diet.dinner : " "}
         </p>
       </div>
       <div className={classes.box}>
-        <h3 className={classes.head}>Snacks</h3>
+        <h4 className={classes.head}>Snacks</h4>
         <p className={classes.info}>
           {diet && diet.snacks ? diet.snacks : " "}
         </p>
@@ -128,8 +128,7 @@ const DailyDiet = (props) => {
 
   return (
     <Fragment>
-      <p>{date}</p>
-      <p>{day}</p>
+      <h3 className={classes.date}>{date} ({day})</h3>
       <Card>
         {!showUpdate && dietList}
         {showUpdate && (

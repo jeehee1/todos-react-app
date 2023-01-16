@@ -9,7 +9,8 @@
 .search label{
     display: block;
     margin: 1rem;
-
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .search input {

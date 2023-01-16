@@ -2,6 +2,15 @@
         display: flex;
 }
 
+.date {
+    padding: 0 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 3rem 0 1rem ; 
+    border-bottom: 6px solid #84efc4;
+    width: 220px;
+}
+
 .head {
     font-weight: 500;
     width: 20%;
