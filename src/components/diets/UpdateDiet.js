@@ -1,3 +1,4 @@
+import classes from "./UpdateDiet.module.css";
 import { useRef } from "react";
 
 const UpdateDiet = (props) => {
@@ -21,7 +22,7 @@ const UpdateDiet = (props) => {
   };
 
   return (
-    <form onSubmit={submitDietHandler}>
+    <form className={classes.update} onSubmit={submitDietHandler}>
       <label htmlFor="breakfast">Breakfast</label>
       <input
         type="text"
@@ -35,7 +36,9 @@ const UpdateDiet = (props) => {
       <input type="text" id="dinner" ref={dinnerRef} defaultValue={dinner} />
       <label htmlFor="snacks">Snacks</label>
       <input type="text" id="snacks" ref={snacksRef} defaultValue={snacks} />
-      <button>save</button>
+      <div className={classes.btn}>
+        <button>save</button>
+      </div>
     </form>
   );
 };

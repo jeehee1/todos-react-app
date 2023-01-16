@@ -1,0 +1,35 @@
+.update {
+    width: 100%;
+}
+
+.update label {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.update input {
+    width: 100%;
+    margin: 0.8rem 0;
+    padding: 0.3rem;
+}
+
+.btn {
+ display: flex;
+ text-align: right;
+ justify-content: flex-end;
+}
+
+.btn button {
+    padding: 0.8rem 1.5rem;
+    background-color: #8eb4a8;
+    border: solid 1px #8eb4a8;
+    border-radius: 4px;
+    color: #3d3d3d;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.btn :hover,
+.btn :active {
+    cursor: pointer;
+}
