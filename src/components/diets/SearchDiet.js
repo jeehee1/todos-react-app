@@ -1,6 +1,6 @@
 import classes from "./SearchDiet.module.css";
 import { Fragment, useContext, useRef, useState } from "react";
-import { getDietPlan } from "../../lib/api";
+import { getDietPlan } from "../../lib/todosApi";
 import { formattedToday } from "../../lib/formattedToday";
 import { useEffect } from "react";
 import getDateOfWeek from "../../lib/getDayOfWeek";

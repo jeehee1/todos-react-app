@@ -1,5 +1,3 @@
-import { useContext, useEffect, useState } from "react";
-import { deleteTodo, getAllTodos } from "../../lib/api";
 import TodoItem from "./TodoItem";
 import classes from "./TodosList.module.css";
 

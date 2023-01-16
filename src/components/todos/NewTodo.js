@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import classes from "./NewTodo.module.css";
-import { addTodo } from "../../lib/api";
+import { addTodo } from "../../lib/todosApi";
 
 const NewTodo = (props) => {
   const enteredTodoText = useRef();

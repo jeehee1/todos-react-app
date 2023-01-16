@@ -1,7 +1,7 @@
 import TodosList from "../components/todos/TodosList";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import NewTodo from "../components/todos/NewTodo";
-import { addTodo, deleteTodo, getAllTodos } from "../lib/api";
+import { addTodo, deleteTodo, getAllTodos } from "../lib/todosApi";
 
 const orderedTodos = (todos, isOrdered) => {
   return isOrdered

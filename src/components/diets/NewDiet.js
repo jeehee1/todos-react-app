@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Select from "react-select";
-import { addDietPlan } from "../../lib/api";
+import { addDietPlan } from "../../lib/todosApi";
 
 const options = [
   { value: "Breakfast", label: "Breakfast" },
