@@ -3,4 +3,11 @@
     border: 2px solid hsl(192, 74%, 34%);
     margin-bottom: 1rem;
     padding: 1rem;
+    border-radius: 8px;
+}
+
+.list:hover,
+.list:active{
+    cursor: pointer;
+    background-color: #dedbdb;
 }

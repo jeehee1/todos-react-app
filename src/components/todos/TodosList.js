@@ -14,7 +14,7 @@ const orderTodos = (todos, recentlyOrdered) => {
 const TodosList = (props) => {
   const [orderedRecently, setOrderedRecently] = useState(true);
   const [orderedTodos, setOrderedTodos] = useState([]);
-  
+
   useEffect(() => {
     setOrderedTodos(orderTodos(props.allTodos, orderedRecently));
   }, [props.allTodos, orderedRecently]);
@@ -42,7 +42,7 @@ const TodosList = (props) => {
           <TodoItem
             todoItem={todo}
             key={todo.id}
-            onDelete={props.onDeleteTodo}
+            deleteTodo={props.onDeleteTodo}
           />
         ))}
       </ul>
