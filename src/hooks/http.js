@@ -4,9 +4,15 @@ import { useReducer } from "react";
 const httpReducer = (curHttpState, action) => {
   switch (action.type) {
     case "SEND":
-      return { loading: true, error: null, data: null };
+      return { loading: true, error: null, data: null, extra: null };
     case "RESPONSE":
-      return { ...curHttpState, loading: false, data: action.responseData };
+      return {
+        ...curHttpState,
+        loading: false,
+        data: action.responseData,
+        extra: action.extra,
+        identifier: action.identifier,
+      };
     case "ERROR":
       return { loading: false, error: action.errorMessage };
     default:
@@ -19,37 +25,53 @@ const useHttp = () => {
     loading: false,
     error: null,
     data: null,
+    extra: null,
+    identifier: null,
   });
 
-  const sendRequest = useCallback(async (url, method, body = null) => {
-    console.log("send");
-    dispatchHttp({ type: "SEND" });
-    try {
-      const response = await fetch(url, {
-        method: method,
-        body: body,
-        headers: { "Content-Type": "application/json" },
-      });
-      if (!response.ok) {
-        dispatchHttp({ type: "ERROR", errorMessage: "Something went wrong!" });
-        return;
+  const sendRequest = useCallback(
+    async (url, method, body, reqInfo, reqIdentifier) => {
+      console.log("send");
+      dispatchHttp({ type: "SEND" });
+      try {
+        const response = await fetch(url, {
+          method: method,
+          body: body,
+          headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+          dispatchHttp({
+            type: "ERROR",
+            errorMessage: "Something went wrong!",
+          });
+          return;
+        }
+        const data = await response.json();
+        console.log("response");
+        console.log(data);
+        dispatchHttp({
+          type: "RESPONSE",
+          responseData: data,
+          extra: reqInfo,
+          identifier: reqIdentifier,
+        });
+      } catch (err) {
+        dispatchHttp({
+          type: "ERROR",
+          errorMessate: "err.message" || "Something went wrong!",
+        });
       }
-      const data = await response.json();
-      console.log("response");
-      dispatchHttp({ type: "RESPONSE", responseData: data });
-    } catch (err) {
-      dispatchHttp({
-        type: "ERROR",
-        errorMessate: "err.message" || "Something went wrong!",
-      });
-    }
-  }, []);
+    },
+    []
+  );
 
   return {
     loading: httpState.loading,
     data: httpState.data,
     error: httpState.error,
     sendRequest: sendRequest,
+    extra: httpState.extra,
+    identifier: httpState.identifier,
   };
 };
 
