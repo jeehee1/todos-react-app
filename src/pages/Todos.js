@@ -5,13 +5,7 @@ import { addTodo, deleteTodo, getAllTodos } from "../lib/todosApi";
 import useHttp from "../hooks/http";
 import { useReducer } from "react";
 
-const orderedTodos = (todos, isOrdered) => {
-  return isOrdered
-    ? todos.concat().sort((todoA, todoB) => {
-        return todoA.date > todoB.date ? 1 : -1;
-      })
-    : todos;
-};
+
 
 const todoReducer = (currentTodos, action) => {
   switch (action.type) {
@@ -26,19 +20,9 @@ const todoReducer = (currentTodos, action) => {
 
 const Todos = (props) => {
   const [allTodos, setAllTodos] = useState([]);
-  const [orderedRecently, setOrderedRecently] = useState(false);
+  const [orderedRecently, setOrderedRecently] = useState(true);
   const { error, loading, data, sendRequest, extra, identifier } = useHttp();
   const [todos, dispatch] = useReducer(todoReducer, []);
-
-  useEffect(() => {
-    sendRequest(
-      "https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos.json",
-      "GET",
-      null,
-      null,
-      "SET_TODOS"
-    );
-  }, [sendRequest]);
 
   useEffect(() => {
     if (!loading && !error && data && identifier === "SET_TODOS") {
@@ -51,20 +35,38 @@ const Todos = (props) => {
         transformedTodos.push(todoObj);
       }
       dispatch({ type: "SET", todos: transformedTodos });
-    } else if (!loading && !error && data && identifier === "ADD_TODO") {
+    }
+    if (!loading && !error && data && identifier === "ADD_TODO") {
       dispatch({ type: "ADD", newTodo: { id: data.name, ...extra } });
     }
   }, [loading, error, data]);
 
-  const orderedAllTodos = orderedTodos(allTodos, orderedRecently);
+  useEffect(() => {
+    console.log("Getting todo useeffect");
+    sendRequest(
+      "https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos.json",
+      "GET",
+      null,
+      null,
+      "SET_TODOS"
+    );
+  }, []);
 
-  const orderRecentlyHandler = () => {
-    setOrderedRecently(true);
-  };
-
-  const orderByDateHandler = () => {
-    setOrderedRecently(false);
-  };
+  // useEffect(() => {
+  //   if (!loading && !error && data && identifier === "SET_TODOS") {
+  //     const transformedTodos = [];
+  //     for (const key in data) {
+  //       const todoObj = {
+  //         id: key,
+  //         ...data[key],
+  //       };
+  //       transformedTodos.push(todoObj);
+  //     }
+  //     dispatch({ type: "SET", todos: transformedTodos });
+  //   } else if (!loading && !error && data && identifier === "ADD_TODO") {
+  //     dispatch({ type: "ADD", newTodo: { id: data.name, ...extra } });
+  //   }
+  // }, [loading, error, data]);
 
   const addTodoHandler = useCallback(
     async (newTodo) => {
@@ -91,9 +93,6 @@ const Todos = (props) => {
         <TodosList
           allTodos={todos}
           onDeleteTodo={deleteTodoHandler}
-          onOrderRecently={orderRecentlyHandler}
-          onOrderByDate={orderByDateHandler}
-          isOrderedRecently={orderedRecently}
         />
       )}
     </Fragment>
