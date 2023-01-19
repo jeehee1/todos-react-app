@@ -12,7 +12,9 @@ const NewTodo = (props) => {
     const newTodoText = enteredTodoText.current.value;
     const newTodoDate = enteredTodoDate.current.value;
 
-    props.addTodo(newTodoText, newTodoDate);
+    const newTodo = {text: newTodoText, date: newTodoDate}
+
+    props.addTodo(newTodo);
   };
 
   return (
