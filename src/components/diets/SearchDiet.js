@@ -1,8 +1,5 @@
 import classes from "./SearchDiet.module.css";
-import { Fragment, useContext, useRef, useState } from "react";
-import { getDietPlan } from "../../lib/todosApi";
-import { formattedToday } from "../../lib/formattedToday";
-import { useEffect } from "react";
+import { useRef } from "react";
 import getDateOfWeek from "../../lib/getDayOfWeek";
 import Card from "../../layout/Card";
 
@@ -12,7 +9,6 @@ const SearchDiet = (props) => {
     event.preventDefault();
     const week = searchWeek.current.value;
     const date = getDateOfWeek(week);
-    
     props.onSetStartDate(week, date);
   };
   return (

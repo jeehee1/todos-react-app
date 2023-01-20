@@ -1,8 +1,6 @@
 import classes from "./DailyDiet.module.css";
 
 import { Fragment, useEffect } from "react";
-import SearchDiet from "./SearchDiet";
-import NewDiet from "./NewDiet";
 import { useState } from "react";
 import UpdateDiet from "./UpdateDiet";
 import Card from "../../layout/Card";
@@ -26,7 +24,6 @@ const DailyDiet = (props) => {
 
   console.log("date");
   console.log(date);
-  // const [diet, setDiet] = useState();
   const [diet, dispatch] = useReducer(dietReducer, []);
   const [showUpdate, setShowUpdate] = useState(false);
 
@@ -40,12 +37,11 @@ const DailyDiet = (props) => {
       date,
       "SET_DIET"
     );
-    console.log(data);
   }, []);
 
   useEffect(() => {
     let dietInfo;
-    if (identifier === "SET_DIET") {
+    if (!error && !loading && identifier === "SET_DIET") {
       dietInfo = {
         key: null,
         date: date,
@@ -70,7 +66,7 @@ const DailyDiet = (props) => {
       }
       dispatch({ type: "UPDATE", newDiet: diet });
     }
-  }, [data]);
+  }, [error, loading, identifier, data]);
 
   const updateDietHandler = (event) => {
     event.preventDefault();
@@ -95,21 +91,6 @@ const DailyDiet = (props) => {
       newDiet,
       "UPDATE_DIET"
     );
-    // fetch(
-    //   `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`,
-    //   {
-    //     method: "POST",
-    //     body: JSON.stringify(newDiet),
-    //     headers: { "Content-Type": "application/json" },
-    //   }
-    // )
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((responseData) => {
-    //     console.log(responseData);
-    //     // setDiet({ key: responseData.name, ...newDiet });
-    //   });
     setShowUpdate(false);
     props.onVisibleUpdateBtn();
   };
