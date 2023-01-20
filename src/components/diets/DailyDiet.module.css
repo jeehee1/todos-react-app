@@ -1,44 +1,44 @@
 .box {
-        display: flex;
+  display: flex;
 }
 
 .date {
-    padding: 0 1rem;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin: 3rem 0 1rem ; 
-    border-bottom: 6px solid #84efc4;
-    width: 220px;
+  padding: 0 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 3rem 0 1rem;
+  border-bottom: 6px solid #84efc4;
+  width: 220px;
 }
 
 .head {
-    font-weight: 500;
-    width: 20%;
-    text-align: center;
-    margin: 1rem;
+  font-weight: 500;
+  width: 20%;
+  text-align: center;
+  margin: 1rem;
 }
 
 .info {
-    text-align: center;
-    width: 80%;
-    text-align: center;
+  text-align: center;
+  width: 80%;
+  text-align: center;
 }
 
 .btn {
-    text-align: right;   
+  text-align: right;
 }
 
 .btn button {
-    padding: 0.8rem 1.2rem;
-    background-color: #8eb4a8;
-    border: solid 1px #8eb4a8;
-    border-radius: 4px;
-    color: #3d3d3d;
-    font-weight: bold;
-    font-size: 0.9rem;
+  padding: 0.8rem 1.2rem;
+  background-color: #8eb4a8;
+  border: solid 1px #8eb4a8;
+  border-radius: 4px;
+  color: #3d3d3d;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .btn :hover,
 .btn :active {
-    cursor: pointer;
+  cursor: pointer;
 }

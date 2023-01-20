@@ -6,42 +6,71 @@ import NewDiet from "./NewDiet";
 import { useState } from "react";
 import UpdateDiet from "./UpdateDiet";
 import Card from "../../layout/Card";
+import useHttp from "../../hooks/http";
+import { useReducer } from "react";
+
+const dietReducer = (curDiet, action) => {
+  switch (action.type) {
+    case "SET":
+      return action.diet;
+    case "UPDATE":
+      return { ...curDiet, ...action.newDiet };
+    default:
+      throw new Error("Something went wrong!");
+  }
+};
 
 const DailyDiet = (props) => {
   const date = props.searchDate.substring(0, 10);
   const day = props.searchDate.substring(10, 13);
-  const [diet, setDiet] = useState();
+
+  console.log("date");
+  console.log(date);
+  // const [diet, setDiet] = useState();
+  const [diet, dispatch] = useReducer(dietReducer, []);
   const [showUpdate, setShowUpdate] = useState(false);
 
+  const { loading, error, data, extra, identifier, sendRequest } = useHttp();
+
   useEffect(() => {
-    // if (date !== null) {
-    fetch(
-      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((responseData) => {
-        if (responseData === null) {
-          setDiet({
-            key: null,
-            date: date,
-            day: day,
-            breafkast: null,
-            lunch: null,
-            snacks: null,
-          });
-        }
-        for (const key in responseData) {
-          setDiet({ key: key, date: date, ...responseData[key] });
-        }
-      });
-    // } else {
+    sendRequest(
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`,
+      "GET",
+      null,
+      date,
+      "SET_DIET"
+    );
+    console.log(data);
+  }, []);
 
-    // }
-  }, [date]);
-
-  console.log(diet);
+  useEffect(() => {
+    let dietInfo;
+    if (identifier === "SET_DIET") {
+      dietInfo = {
+        key: null,
+        date: date,
+        day: day,
+        breafkast: null,
+        lunch: null,
+        snacks: null,
+      };
+      if (data !== null) {
+        for (const key in data) {
+          dietInfo = { date: date, key: key, ...data[key] };
+        }
+      }
+      dispatch({ type: "SET", diet: dietInfo });
+    }
+    if (!error && !loading && identifier === "UPDATE_DIET") {
+      let diet;
+      if (data.name) {
+        diet = { ...extra, key: data.name };
+      } else {
+        diet = extra;
+      }
+      dispatch({ type: "UPDATE", newDiet: diet });
+    }
+  }, [data]);
 
   const updateDietHandler = (event) => {
     event.preventDefault();
@@ -50,48 +79,40 @@ const DailyDiet = (props) => {
   };
 
   const saveDietHandler = (newDiet) => {
-    if (diet.key)
-      fetch(
-        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}/${diet.key}.json`,
-        {
-          method: "PATCH",
-          body: JSON.stringify(newDiet),
-          headers: { "Content-Type": "application/json" },
-        }
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((responseData) => {
-          setDiet({ date: date, key: diet.key, ...responseData });
-          props.onVisibleUpdateBtn();
-        })
-        .catch((error) => {
-          return error;
-        });
-    else {
-      fetch(
-        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`,
-        {
-          method: "POST",
-          body: JSON.stringify(newDiet),
-          headers: { "Content-Type": "application/json" },
-        }
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((responseData) => {
-          console.log(responseData);
-          setDiet({ key: responseData.name, ...newDiet });
-          props.onVisibleUpdateBtn();
-        });
+    let url;
+    let strMethod;
+    if (diet.key) {
+      url = `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}/${diet.key}.json`;
+      strMethod = "PATCH";
+    } else {
+      url = `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`;
+      strMethod = "POST";
     }
+    sendRequest(
+      url,
+      strMethod,
+      JSON.stringify(newDiet),
+      newDiet,
+      "UPDATE_DIET"
+    );
+    // fetch(
+    //   `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`,
+    //   {
+    //     method: "POST",
+    //     body: JSON.stringify(newDiet),
+    //     headers: { "Content-Type": "application/json" },
+    //   }
+    // )
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((responseData) => {
+    //     console.log(responseData);
+    //     // setDiet({ key: responseData.name, ...newDiet });
+    //   });
     setShowUpdate(false);
+    props.onVisibleUpdateBtn();
   };
-
-  console.log("diet : ");
-  console.log(diet);
 
   const dietList = (
     <Fragment>
@@ -128,13 +149,16 @@ const DailyDiet = (props) => {
 
   return (
     <Fragment>
-      <h3 className={classes.date}>{date} ({day})</h3>
+      <h3 className={classes.date}>
+        {date} ({day})
+      </h3>
       <Card>
-        {!showUpdate && dietList}
-        {showUpdate && (
+        {loading && <p>Loading...</p>}
+        {!showUpdate && !loading && dietList}
+        {showUpdate && !loading && (
           <UpdateDiet dietInfo={diet} onSaveDiet={saveDietHandler} />
         )}
-        {props.updateBtn && updateBtn}
+        {props.updateBtn && !loading && updateBtn}
       </Card>
     </Fragment>
   );

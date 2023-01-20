@@ -19,8 +19,6 @@ const todoReducer = (currentTodos, action) => {
 };
 
 const Todos = (props) => {
-  const [allTodos, setAllTodos] = useState([]);
-  const [orderedRecently, setOrderedRecently] = useState(true);
   const { error, loading, data, sendRequest, extra, identifier } = useHttp();
   const [todos, dispatch] = useReducer(todoReducer, []);
 
