@@ -1,13 +1,7 @@
+import Login from "../components/auth/Login";
+
 const Auth = () => {
-  return (
-    <form>
-      <label>User Name</label>
-      <input type="text" />
-      <label>User Password</label>
-      <input type="password" />
-      <button>Login</button>
-    </form>
-  );
+  return <Login />;
 };
 
 export default Auth;
