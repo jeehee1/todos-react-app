@@ -1,5 +1,6 @@
+import classes from "./Login.module.css";
 import { useReducer } from "react";
-import { useState } from "react";
+import Card from "../../layout/Card";
 
 const inputReducer = (state, action) => {
   switch (action.type) {
@@ -90,31 +91,33 @@ const Login = () => {
   };
 
   return (
-    <form>
-      <label htmlFor="email">User Email</label>
-      <input
-        type="text"
-        id="email"
-        onChange={getEmailHandler}
-        onBlur={blurEmailHalndler}
-      />
-      {inputState.emailIsTouched && !inputState.emailIsValid && (
-        <p>Email must include @</p>
-      )}
-      <label htmlFor="password">User Password</label>
-      <input
-        type="password"
-        id="password"
-        onChange={getPwdHandler}
-        onBlur={blurPwdHandler}
-      />
-      {inputState.pwdIsTouched && !inputState.pwdIsValid && (
-        <p>Password must be longer than 6 digis.</p>
-      )}
-      <button disabled={!inputState.eamilIsValid || !inputState.pwdIsValid}>
-        Login
-      </button>
-    </form>
+    <Card>
+      <form className={classes.login}>
+        <label htmlFor="email">User Email</label>
+        <input
+          type="text"
+          id="email"
+          onChange={getEmailHandler}
+          onBlur={blurEmailHalndler}
+        />
+        {inputState.emailIsTouched && !inputState.emailIsValid && (
+          <p className={classes.invalid}>Email must include "@"</p>
+        )}
+        <label htmlFor="password">User Password</label>
+        <input
+          type="password"
+          id="password"
+          onChange={getPwdHandler}
+          onBlur={blurPwdHandler}
+        />
+        {inputState.pwdIsTouched && !inputState.pwdIsValid && (
+          <p className={classes.invalid}>Password must be longer than 6 digis.</p>
+        )}
+        <button disabled={!inputState.eamilIsValid || !inputState.pwdIsValid}>
+          Login
+        </button>
+      </form>
+    </Card>
   );
 };
 
