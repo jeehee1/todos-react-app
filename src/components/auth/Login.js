@@ -90,6 +90,14 @@ const Login = () => {
     dispatch({ type: "PWD_TOUCHED" });
   };
 
+  let formIsValid = false;
+  if (inputState.emailIsValid && inputState.pwdIsValid) {
+    formIsValid = true;
+  }
+  console.log(inputState.emailIsValid);
+  console.log(inputState.pwdIsValid);
+  console.log(formIsValid);
+
   return (
     <Card>
       <form className={classes.login}>
@@ -111,11 +119,11 @@ const Login = () => {
           onBlur={blurPwdHandler}
         />
         {inputState.pwdIsTouched && !inputState.pwdIsValid && (
-          <p className={classes.invalid}>Password must be longer than 6 digis.</p>
+          <p className={classes.invalid}>
+            Password must be longer than 6 digis.
+          </p>
         )}
-        <button disabled={!inputState.eamilIsValid || !inputState.pwdIsValid}>
-          Login
-        </button>
+        <button disabled={!formIsValid}>Login</button>
       </form>
     </Card>
   );
