@@ -96,15 +96,31 @@ const AuthForm = (props) => {
     formIsValid = true;
   }
 
+  const authenticateHandler = (event) => {
+    event.preventDefault();
+    props.onAuthenticate({
+      email: inputState.emailValue,
+      password: inputState.pwdValue,
+      returnSecureToken: true,
+    });
+    console.log({
+      email: inputState.emailValue,
+      password: inputState.pwdValue,
+      returnSecureToken: true,
+    });
+    dispatch({ type: "RESET" });
+  };
+
   return (
     <Card>
-      <form method="post" className={classes.form}>
+      <form onSubmit={authenticateHandler} className={classes.form}>
         <label htmlFor="email">User Email</label>
         <input
           type="text"
           id="email"
           onChange={getEmailHandler}
           onBlur={blurEmailHalndler}
+          value={inputState.emailValue}
         />
         {inputState.emailIsTouched && !inputState.emailIsValid && (
           <p className={classes.invalid}>Email must include "@"</p>
@@ -115,17 +131,23 @@ const AuthForm = (props) => {
           id="password"
           onChange={getPwdHandler}
           onBlur={blurPwdHandler}
+          value={inputState.pwdValue}
         />
         {inputState.pwdIsTouched && !inputState.pwdIsValid && (
           <p className={classes.invalid}>
             Password must be longer than 6 digis.
           </p>
         )}
+        {inputState.emailIsTouched || inputState.pwdIsTouched ? null : (
+          <p className={classes.invalid}>{props.error}</p>
+        )}
         <div className={classes.actions}>
           <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
             {isLogin ? "Create New User" : "Login"}
           </Link>
-          <button disabled={!formIsValid}>{isLogin ? "Login" : "Save"}</button>
+          <button disabled={!formIsValid}>
+            {isLogin ? "Login" : props.loading ? "Sending..." : "Sign Up"}
+          </button>
         </div>
       </form>
     </Card>

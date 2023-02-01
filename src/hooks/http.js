@@ -40,9 +40,12 @@ const useHttp = () => {
           headers: { "Content-Type": "application/json" },
         });
         if (!response.ok) {
+          const data = await response.json();
           dispatchHttp({
             type: "ERROR",
-            errorMessage: "Something went wrong!",
+            errorMessage: data.error
+              ? data.error.message
+              : "Something went wrong!",
           });
           return;
         }
@@ -58,7 +61,7 @@ const useHttp = () => {
       } catch (err) {
         dispatchHttp({
           type: "ERROR",
-          errorMessate: "err.message" || "Something went wrong!",
+          errorMessage: "err.message" || "Something went wrong!",
         });
       }
     },
