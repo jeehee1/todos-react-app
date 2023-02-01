@@ -1,7 +1,12 @@
-import Login from "../components/auth/Login";
+import { useParams, useSearchParams } from "react-router-dom";
+import AuthForm from "../components/auth/AuthForm";
 
 const Auth = () => {
-  return <Login />;
+  const [searchParams] = useSearchParams();
+  const isLogin = searchParams.get("mode") === "login";
+
+  
+  return <AuthForm loginPage={isLogin}/>;
 };
 
 export default Auth;

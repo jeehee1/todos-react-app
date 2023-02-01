@@ -1,6 +1,7 @@
-import classes from "./Login.module.css";
+import classes from "./AuthForm.module.css";
 import { useReducer } from "react";
 import Card from "../../layout/Card";
+import { Link, useSearchParams } from "react-router-dom";
 
 const inputReducer = (state, action) => {
   switch (action.type) {
@@ -38,9 +39,9 @@ const inputReducer = (state, action) => {
   }
 };
 
-const Login = () => {
-  // const [eamilIsValid, setEmailIsValid] = useState(false);
-  // const [pwdIsValid, setPwdIsValid] = useState(false);
+const AuthForm = (props) => {
+  const isLogin = props.loginPage;
+
   const [inputState, dispatch] = useReducer(inputReducer, {
     eamilIsTouched: false,
     emailValue: "",
@@ -94,13 +95,10 @@ const Login = () => {
   if (inputState.emailIsValid && inputState.pwdIsValid) {
     formIsValid = true;
   }
-  console.log(inputState.emailIsValid);
-  console.log(inputState.pwdIsValid);
-  console.log(formIsValid);
 
   return (
     <Card>
-      <form className={classes.login}>
+      <form method="post" className={classes.form}>
         <label htmlFor="email">User Email</label>
         <input
           type="text"
@@ -123,10 +121,15 @@ const Login = () => {
             Password must be longer than 6 digis.
           </p>
         )}
-        <button disabled={!formIsValid}>Login</button>
+        <div className={classes.actions}>
+          <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
+            {isLogin ? "Create New User" : "Login"}
+          </Link>
+          <button disabled={!formIsValid}>{isLogin ? "Login" : "Save"}</button>
+        </div>
       </form>
     </Card>
   );
 };
 
-export default Login;
+export default AuthForm;

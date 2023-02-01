@@ -29,12 +29,12 @@ const MainNavigation = () => {
           </li>
           <li>
             <NavLink
-              to="/auth"
+              to="/auth?mode=login"
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
             >
-              Login
+              Authentication
             </NavLink>
           </li>
         </ul>
