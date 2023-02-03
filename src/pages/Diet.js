@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useState } from "react";
 import SearchDiet from "../components/diets/SearchDiet";
 import WeeklyDiet from "../components/diets/WeeklyDiet";
@@ -8,7 +9,8 @@ const Diet = () => {
   const [dateOfWeek, setDateOfWeek] = useState([]);
 
   return (
-    <DietContextProvider>
+    // <DietContextProvider>
+    <Fragment>
       <SearchDiet
         date={searchWeek}
         onSetStartDate={(week, date) => {
@@ -16,8 +18,9 @@ const Diet = () => {
           setDateOfWeek(date);
         }}
       />
-      {searchWeek && <WeeklyDiet date={dateOfWeek} week={searchWeek}/>}
-    </DietContextProvider>
+      {searchWeek && <WeeklyDiet date={dateOfWeek} week={searchWeek} />}
+    </Fragment>
+    // </DietContextProvider>
   );
 };
 

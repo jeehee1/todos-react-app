@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { redirect, useSearchParams } from "react-router-dom";
 import AuthForm from "../components/auth/AuthForm";
 import useHttp from "../hooks/http";
+import AuthContext from "../store/auth-context";
 
 const Auth = () => {
+  const authCtx = useContext(AuthContext);
+
   const [searchParams] = useSearchParams();
   const isLogin = searchParams.get("mode") === "login";
 
@@ -28,6 +32,10 @@ const Auth = () => {
       );
     }
     console.log(data);
+    const expirationTime = new Date(
+      new Date().getTime() + data.expiresIn * 1000
+    );
+    authCtx.login(data.idToken, expirationTime);
     return redirect("/");
   };
 

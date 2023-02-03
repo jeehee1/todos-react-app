@@ -3,8 +3,11 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Diet from "./pages/Diet";
 import Auth from "./pages/Auth";
+import { useContext } from "react";
+import AuthContext from "./store/auth-context";
 
 function App() {
+  const authCtx = useContext(AuthContext);
   return (
     <Layout>
       <Routes>
