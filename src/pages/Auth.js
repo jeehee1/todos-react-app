@@ -1,53 +1,61 @@
 import { useContext } from "react";
-import { redirect, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import AuthForm from "../components/auth/AuthForm";
-import useHttp from "../hooks/http";
 import AuthContext from "../store/auth-context";
 
 const Auth = () => {
-  const authCtx = useContext(AuthContext);
-
   const [searchParams] = useSearchParams();
   const isLogin = searchParams.get("mode") === "login";
-
-  const { loading, error, sendRequest, data } = useHttp();
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const authenticateHandler = (authBody) => {
-    console.log(authBody);
+    let url;
     if (isLogin) {
-      sendRequest(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD5zLNBnsLuWNzLSZ5JCfD_tJ-Q_Q1yzII",
-        "POST",
-        JSON.stringify(authBody),
-        null,
-        "LOG_IN"
-      );
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD5zLNBnsLuWNzLSZ5JCfD_tJ-Q_Q1yzII";
     } else {
-      sendRequest(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD5zLNBnsLuWNzLSZ5JCfD_tJ-Q_Q1yzII",
-        "POST",
-        JSON.stringify(authBody),
-        null,
-        "SIGN_IN"
-      );
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD5zLNBnsLuWNzLSZ5JCfD_tJ-Q_Q1yzII";
     }
-    console.log(data);
-    const expirationTime = new Date(
-      new Date().getTime() + data.expiresIn * 1000
-    );
-    authCtx.login(data.idToken, expirationTime);
-    return redirect("/");
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(authBody),
+      headers: { "Content-Type": "applicaiton/json" },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((data) => {
+            let errorMessage = "Authnetication failed";
+            throw new Error(errorMessage);
+          });
+        }
+      })
+      .then((data) => {
+        console.log("auth data");
+        console.log(data);
+        const expirationTime = new Date(
+          new Date().getTime() + data.expiresIn * 1000
+        );
+        console.log(expirationTime);
+        authCtx.login(data.idToken, expirationTime);
+        console.log(authCtx);
+        return navigate("/");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+    // if (response.status === 422 || response.status === 401) {
+    //   return response;
+    // }
+    // if (!response.ok) {
+    //   throw json({ message: "Could not authenticate user" });
+    // }
   };
 
-  return (
-    <AuthForm
-      loginPage={isLogin}
-      onAuthenticate={authenticateHandler}
-      error={error}
-      loading={loading}
-      authData={data}
-    />
-  );
+  return <AuthForm loginPage={isLogin} onAuthenticate={authenticateHandler} />;
 };
 
 export default Auth;

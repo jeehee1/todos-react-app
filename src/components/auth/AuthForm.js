@@ -1,7 +1,7 @@
 import classes from "./AuthForm.module.css";
 import { useReducer } from "react";
 import Card from "../../layout/Card";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const inputReducer = (state, action) => {
   switch (action.type) {
@@ -98,17 +98,16 @@ const AuthForm = (props) => {
 
   const authenticateHandler = (event) => {
     event.preventDefault();
-    props.onAuthenticate({
-      email: inputState.emailValue,
-      password: inputState.pwdValue,
-      returnSecureToken: true,
-    });
     console.log({
       email: inputState.emailValue,
       password: inputState.pwdValue,
       returnSecureToken: true,
     });
-    dispatch({ type: "RESET" });
+    props.onAuthenticate({
+      email: inputState.emailValue,
+      password: inputState.pwdValue,
+      returnSecureToken: true,
+    });
   };
 
   return (
