@@ -1,16 +1,15 @@
 import classes from "./UpdateDiet.module.css";
 import { useRef } from "react";
+import { Fragment } from "react";
 
 const UpdateDiet = (props) => {
-  const { day, breakfast, lunch, dinner, snacks } = props.dietInfo;
+  const { key, day, breakfast, lunch, dinner, snacks } = props.dietInfo;
   const breakfastRef = useRef();
   const lunchRef = useRef();
   const dinnerRef = useRef();
   const snacksRef = useRef();
 
-  const submitDietHandler = (event) => {
-    event.preventDefault();
-
+  const submitDietHandler = () => {
     const newDietData = {
       day: day,
       breakfast: breakfastRef.current.value,
@@ -21,8 +20,16 @@ const UpdateDiet = (props) => {
     props.onSaveDiet(newDietData);
   };
 
+  const deleteDietHandler = () => {
+    props.onDeleteDiet(key);
+  };
+
+  const cancelUpdateHandler = () => {
+    props.onCancelUpdate();
+  };
+
   return (
-    <form className={classes.update} onSubmit={submitDietHandler}>
+    <form className={classes.update}>
       <label htmlFor="breakfast">Breakfast</label>
       <input
         type="text"
@@ -37,7 +44,9 @@ const UpdateDiet = (props) => {
       <label htmlFor="snacks">Snacks</label>
       <input type="text" id="snacks" ref={snacksRef} defaultValue={snacks} />
       <div className={classes.btn}>
-        <button>save</button>
+        <button onClick={cancelUpdateHandler}>Cancel</button>
+        <button onClick={submitDietHandler}>Save</button>
+        {key && <button onClick={deleteDietHandler}>Delete</button>}
       </div>
     </form>
   );

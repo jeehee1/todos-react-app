@@ -1,37 +1,40 @@
 .update {
-    width: 100%;
+  width: 100%;
 }
 
 .update label {
-    width: 100%;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin: 1rem 0;
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 1rem 0;
 }
 
 .update input {
-    width: 100%;
-    margin: 0.8rem 0;
-    padding: 0.3rem;
+  width: 100%;
+  margin: 0.8rem 0;
+  padding: 0.3rem;
 }
 
 .btn {
- display: flex;
- text-align: right;
- justify-content: flex-end;
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
 }
 
 .btn button {
-    padding: 0.8rem 1.5rem;
-    background-color: #8eb4a8;
-    border: solid 1px #8eb4a8;
-    border-radius: 4px;
-    color: #3d3d3d;
-    font-weight: bold;
-    font-size: 0.9rem;
+  margin-left: 1rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #8eb4a8;
+  border: solid 1px #8eb4a8;
+  border-radius: 4px;
+  color: #3d3d3d;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .btn :hover,
 .btn :active {
-    cursor: pointer;
+  cursor: pointer;
+  background-color: #74b09d;
+  color: #3a3838
 }

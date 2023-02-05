@@ -13,6 +13,15 @@ const dietReducer = (curDiet, action) => {
       return action.diet;
     case "UPDATE":
       return { ...curDiet, ...action.newDiet };
+    case "DELETE":
+      return {
+        ...curDiet,
+        key: null,
+        breakfast: null,
+        lunch: null,
+        dinner: null,
+        snacks: null,
+      };
     default:
       throw new Error("Something went wrong!");
   }
@@ -46,8 +55,9 @@ const DailyDiet = (props) => {
         key: null,
         date: date,
         day: day,
-        breafkast: null,
+        breakfast: null,
         lunch: null,
+        dinner: null,
         snacks: null,
       };
       if (data !== null) {
@@ -65,6 +75,9 @@ const DailyDiet = (props) => {
         diet = extra;
       }
       dispatch({ type: "UPDATE", newDiet: diet });
+    }
+    if (!error && !loading && identifier === "DELETE_DIET") {
+      dispatch({ type: "DELETE" });
     }
   }, [error, loading, identifier, data]);
 
@@ -93,6 +106,24 @@ const DailyDiet = (props) => {
     );
     setShowUpdate(false);
     props.onVisibleUpdateBtn();
+  };
+
+  const deleteDietHandler = (dietId) => {
+    sendRequest(
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}/${dietId}.json`,
+      "DELETE",
+      null,
+      null,
+      "DELETE_DIET"
+    );
+    setShowUpdate(false);
+    props.onVisibleUpdateBtn();
+    console.log(diet);
+  };
+
+  const cancelUpdateHandler = () => {
+    props.onVisibleUpdateBtn();
+    setShowUpdate(false);
   };
 
   const dietList = (
@@ -137,7 +168,12 @@ const DailyDiet = (props) => {
         {loading && <p>Loading...</p>}
         {!showUpdate && !loading && dietList}
         {showUpdate && !loading && (
-          <UpdateDiet dietInfo={diet} onSaveDiet={saveDietHandler} />
+          <UpdateDiet
+            dietInfo={diet}
+            onSaveDiet={saveDietHandler}
+            onDeleteDiet={deleteDietHandler}
+            onCancelUpdate={cancelUpdateHandler}
+          />
         )}
         {props.updateBtn && !loading && updateBtn}
       </Card>

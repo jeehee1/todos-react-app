@@ -42,7 +42,6 @@ function getDateOfWeek(ISOweek) {
     const dateAndDay = formattedDate + day[i+1];
     weeklyDate.push(dateAndDay);
   }
-  console.log(weeklyDate)
   return weeklyDate;
 }
 
