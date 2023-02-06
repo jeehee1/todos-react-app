@@ -47,12 +47,6 @@ const Auth = () => {
       .catch((err) => {
         alert(err.message);
       });
-    // if (response.status === 422 || response.status === 401) {
-    //   return response;
-    // }
-    // if (!response.ok) {
-    //   throw json({ message: "Could not authenticate user" });
-    // }
   };
 
   return <AuthForm loginPage={isLogin} onAuthenticate={authenticateHandler} />;

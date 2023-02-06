@@ -4,6 +4,9 @@ import NewTodo from "../components/todos/NewTodo";
 import { addTodo, deleteTodo, getAllTodos } from "../lib/todosApi";
 import useHttp from "../hooks/http";
 import { useReducer } from "react";
+import { getUserInfo } from "../lib/users";
+import AuthContext from "../store/auth-context";
+import { useNavigate } from "react-router-dom";
 
 const todoReducer = (currentTodos, action) => {
   switch (action.type) {
@@ -19,8 +22,19 @@ const todoReducer = (currentTodos, action) => {
 };
 
 const Todos = (props) => {
+  const navigate = useNavigate();
   const { error, loading, data, sendRequest, extra, identifier } = useHttp();
   const [todos, dispatch] = useReducer(todoReducer, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (token) {
+      getUserInfo(token);
+    } else {
+      return navigate("/auth");
+    }
+  }, [localStorage]);
 
   useEffect(() => {
     if (!loading && !error && data && identifier === "SET_TODOS") {
