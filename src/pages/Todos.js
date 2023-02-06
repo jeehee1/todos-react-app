@@ -28,7 +28,6 @@ const Todos = (props) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token) {
       getUserInfo(token);
     } else {

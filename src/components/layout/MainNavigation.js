@@ -1,15 +1,17 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
+  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
   const isLoggedIn = authCtx.isLoggedIn;
 
   const logoutHandler = () => {
     authCtx.logout();
+    return navigate("/");
   };
   return (
     <header className={classes.header}>
@@ -38,7 +40,9 @@ const MainNavigation = () => {
           </li>
           <li>
             {isLoggedIn ? (
-              <button onClick={logoutHandler}>Logout</button>
+              <button className={classes.logout} onClick={logoutHandler}>
+                Logout
+              </button>
             ) : (
               <NavLink
                 to="/auth?mode=login"
