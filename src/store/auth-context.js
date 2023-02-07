@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useReducer } from "react";
 
 let logoutTimer;
 
 const AuthContext = React.createContext({
   token: "",
+  user: "",
   isLoggedIn: false,
   login: (token) => {},
   logout: () => {},
@@ -35,19 +37,34 @@ const retrieveStoredToken = () => {
   };
 };
 
+const setUserReducer = (curUser, action) => {
+  if (action.type === "SET") {
+    return { token: action.token, userId: action.userId };
+  }
+  if (action.type === "REMOVE") {
+    return { token: null, user: null };
+  }
+};
+
 export const AuthContextProvider = (props) => {
   const tokenData = retrieveStoredToken();
   let initialToken;
   if (tokenData) {
     initialToken = tokenData.token;
   }
-  const [token, setToken] = useState(initialToken);
+  // const [token, setToken] = useState(initialToken);
+  // const [userId, setUserId] = useState("");
 
-  const userIsLogggedIn = !!token;
+  const [user, dispatch] = useReducer(setUserReducer, {
+    token: null,
+    userId: null,
+  });
 
-  const loginHandler = (token, expirationTime) => {
+  const userIsLogggedIn = !!user.token;
+
+  const loginHandler = (token, userId, expirationTime) => {
     console.log("login");
-    setToken(token);
+    dispatch({ type: "SET", token: token, userId:userId });
     localStorage.setItem("token", token);
     localStorage.setItem("expirationTime", expirationTime);
 
@@ -57,7 +74,7 @@ export const AuthContextProvider = (props) => {
   };
 
   const logoutHandler = () => {
-    setToken(null);
+    dispatch({ type: "REMOVE" });
     localStorage.removeItem("token");
     localStorage.removeItem("expirationTime");
 
@@ -75,7 +92,8 @@ export const AuthContextProvider = (props) => {
   }, [tokenData]);
 
   const contextValue = {
-    token: token,
+    token: user.token,
+    user: user.userId,
     isLoggedIn: userIsLogggedIn,
     login: loginHandler,
     logout: logoutHandler,

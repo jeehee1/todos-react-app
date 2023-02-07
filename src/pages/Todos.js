@@ -7,6 +7,7 @@ import { useReducer } from "react";
 import { getUserInfo } from "../lib/users";
 import AuthContext from "../store/auth-context";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 const todoReducer = (currentTodos, action) => {
   switch (action.type) {
@@ -23,17 +24,11 @@ const todoReducer = (currentTodos, action) => {
 
 const Todos = (props) => {
   const navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
   const { error, loading, data, sendRequest, extra, identifier } = useHttp();
   const [todos, dispatch] = useReducer(todoReducer, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      getUserInfo(token);
-    } else {
-      return navigate("/auth");
-    }
-  }, [localStorage]);
+  const user = authCtx.user;
 
   useEffect(() => {
     if (!loading && !error && data && identifier === "SET_TODOS") {
@@ -56,21 +51,24 @@ const Todos = (props) => {
     }
   }, [loading, error, identifier]);
 
-  useEffect(() => {
-    console.log("Getting todo useeffect");
-    sendRequest(
-      "https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos.json",
-      "GET",
-      null,
-      null,
-      "SET_TODOS"
-    );
-  }, []);
+  useEffect(async () => {
+    if (user) {
+      sendRequest(
+        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos/${user}.json`,
+        "GET",
+        null,
+        null,
+        "SET_TODOS"
+      );
+    } else {
+      return navigate("/auth");
+    }
+  }, [localStorage]);
 
   const addTodoHandler = useCallback(
-    async (newTodo) => {
-      await sendRequest(
-        "https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos.json",
+    (newTodo) => {
+      sendRequest(
+        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos/${user}.json`,
         "POST",
         JSON.stringify(newTodo),
         newTodo,
@@ -81,9 +79,9 @@ const Todos = (props) => {
   );
 
   const deleteTodoHandler = useCallback(
-    async (todoId) => {
-      await sendRequest(
-        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos/${todoId}.json`,
+    (todoId) => {
+      sendRequest(
+        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos/${user}/${todoId}.json`,
         "DELETE",
         null,
         todoId,
