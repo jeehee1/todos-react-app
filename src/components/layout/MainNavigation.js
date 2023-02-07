@@ -13,6 +13,7 @@ const MainNavigation = () => {
     authCtx.logout();
     return navigate("/");
   };
+  
   return (
     <header className={classes.header}>
       <div className={classes.logo}>Planner</div>

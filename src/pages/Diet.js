@@ -1,12 +1,23 @@
+import { useContext } from "react";
+import { useEffect } from "react";
 import { Fragment } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchDiet from "../components/diets/SearchDiet";
 import WeeklyDiet from "../components/diets/WeeklyDiet";
-import DietContextProvider from "../store/diet-context";
+import AuthContext from "../store/auth-context";
 
 const Diet = () => {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
   const [searchWeek, setSearchWeek] = useState();
   const [dateOfWeek, setDateOfWeek] = useState([]);
+
+  useEffect(() => {
+    if (!authCtx.isLoggedIn) {
+      return navigate("/auth");
+    }
+  }, []);
 
   return (
     // <DietContextProvider>

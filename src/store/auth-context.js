@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 
 let logoutTimer;
 
@@ -42,7 +41,7 @@ const setUserReducer = (curUser, action) => {
     return { token: action.token, userId: action.userId };
   }
   if (action.type === "REMOVE") {
-    return { token: null, user: null };
+    return { token: null, userId: null };
   }
 };
 
@@ -56,7 +55,7 @@ export const AuthContextProvider = (props) => {
   // const [userId, setUserId] = useState("");
 
   const [user, dispatch] = useReducer(setUserReducer, {
-    token: null,
+    token: initialToken,
     userId: null,
   });
 

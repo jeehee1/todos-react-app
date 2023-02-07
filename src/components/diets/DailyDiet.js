@@ -6,6 +6,8 @@ import UpdateDiet from "./UpdateDiet";
 import Card from "../../layout/Card";
 import useHttp from "../../hooks/http";
 import { useReducer } from "react";
+import { useContext } from "react";
+import AuthContext from "../../store/auth-context";
 
 const dietReducer = (curDiet, action) => {
   switch (action.type) {
@@ -28,6 +30,9 @@ const dietReducer = (curDiet, action) => {
 };
 
 const DailyDiet = (props) => {
+  const authCtx = useContext(AuthContext);
+  const user = authCtx.user;
+  console.log(user);
   const date = props.searchDate.substring(0, 10);
   const day = props.searchDate.substring(10, 13);
 
@@ -39,13 +44,15 @@ const DailyDiet = (props) => {
   const { loading, error, data, extra, identifier, sendRequest } = useHttp();
 
   useEffect(() => {
-    sendRequest(
-      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`,
-      "GET",
-      null,
-      date,
-      "SET_DIET"
-    );
+    if (date) {
+      sendRequest(
+        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${user}/${date}.json`,
+        "GET",
+        null,
+        date,
+        "SET_DIET"
+      );
+    }
   }, []);
 
   useEffect(() => {
@@ -91,10 +98,10 @@ const DailyDiet = (props) => {
     let url;
     let strMethod;
     if (diet.key) {
-      url = `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}/${diet.key}.json`;
+      url = `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${user}/${date}/${diet.key}.json`;
       strMethod = "PATCH";
     } else {
-      url = `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}.json`;
+      url = `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${user}/${date}.json`;
       strMethod = "POST";
     }
     sendRequest(
@@ -110,7 +117,7 @@ const DailyDiet = (props) => {
 
   const deleteDietHandler = (dietId) => {
     sendRequest(
-      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${date}/${dietId}.json`,
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/diet/${user}/${date}/${dietId}.json`,
       "DELETE",
       null,
       null,

@@ -40,7 +40,6 @@ const Auth = () => {
           new Date().getTime() + data.expiresIn * 1000
         );
         authCtx.login(data.idToken, data.localId, expirationTime);
-        console.log(authCtx);
         return navigate("/");
       })
       .catch((err) => {

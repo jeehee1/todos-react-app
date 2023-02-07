@@ -1,10 +1,8 @@
 import TodosList from "../components/todos/TodosList";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect } from "react";
 import NewTodo from "../components/todos/NewTodo";
-import { addTodo, deleteTodo, getAllTodos } from "../lib/todosApi";
 import useHttp from "../hooks/http";
 import { useReducer } from "react";
-import { getUserInfo } from "../lib/users";
 import AuthContext from "../store/auth-context";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -25,10 +23,10 @@ const todoReducer = (currentTodos, action) => {
 const Todos = (props) => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
+  const {user, isLoggedIn} = authCtx;
   const { error, loading, data, sendRequest, extra, identifier } = useHttp();
   const [todos, dispatch] = useReducer(todoReducer, []);
 
-  const user = authCtx.user;
 
   useEffect(() => {
     if (!loading && !error && data && identifier === "SET_TODOS") {
@@ -49,10 +47,13 @@ const Todos = (props) => {
     if (!loading && !error && identifier === "REMOVE_TODO") {
       dispatch({ type: "REMOVE", id: extra });
     }
-  }, [loading, error, identifier]);
+  }, [loading, error, identifier, data, extra]);
 
-  useEffect(async () => {
-    if (user) {
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return navigate("/auth");
+    }
+    else if (user) {
       sendRequest(
         `https://todos-project-a5fb8-default-rtdb.firebaseio.com/todos/${user}.json`,
         "GET",
@@ -60,10 +61,8 @@ const Todos = (props) => {
         null,
         "SET_TODOS"
       );
-    } else {
-      return navigate("/auth");
     }
-  }, [localStorage]);
+  }, [isLoggedIn, user, navigate, sendRequest]);
 
   const addTodoHandler = useCallback(
     (newTodo) => {
@@ -75,7 +74,7 @@ const Todos = (props) => {
         "ADD_TODO"
       );
     },
-    [sendRequest]
+    [sendRequest, user]
   );
 
   const deleteTodoHandler = useCallback(
@@ -88,7 +87,7 @@ const Todos = (props) => {
         "REMOVE_TODO"
       );
     },
-    [sendRequest]
+    [sendRequest, user]
   );
 
   return (
