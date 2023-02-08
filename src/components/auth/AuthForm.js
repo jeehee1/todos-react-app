@@ -112,7 +112,9 @@ const AuthForm = (props) => {
 
   return (
     <Card>
+      {/* {!props.isLogin && <h1>Sign in</h1>} */}
       <form onSubmit={authenticateHandler} className={classes.form}>
+      {isLogin ? <h1>Sign In</h1>: <h1>Sign Up</h1>}
         <label htmlFor="email">User Email</label>
         <input
           type="text"
@@ -142,10 +144,10 @@ const AuthForm = (props) => {
         )}
         <div className={classes.actions}>
           <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
-            {isLogin ? "Create New User" : "Login"}
+            {isLogin ? "Create New User" : "Login Page"}
           </Link>
           <button disabled={!formIsValid}>
-            {isLogin ? "Login" : props.loading ? "Sending..." : "Sign Up"}
+            {isLogin ? "Login" : props.loading ? "Sending..." : "Save"}
           </button>
         </div>
       </form>

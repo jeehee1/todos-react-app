@@ -8,8 +8,10 @@ const Auth = () => {
   const isLogin = searchParams.get("mode") === "login";
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  let isLoading = false;
 
   const authenticateHandler = (authBody) => {
+    isLoading = true;
     let url;
     if (isLogin) {
       url =
@@ -25,10 +27,12 @@ const Auth = () => {
     })
       .then((res) => {
         if (res.ok) {
-          return res.json();
+        return res.json();
         } else {
           return res.json().then((data) => {
-            let errorMessage = "Authnetication failed";
+            console.log('data when error occured')
+            console.log(data)
+            let errorMessage = data.error.message || "Authnetication failed";
             throw new Error(errorMessage);
           });
         }
@@ -36,6 +40,7 @@ const Auth = () => {
       .then((data) => {
         console.log("auth data");
         console.log(data);
+        isLoading = false;
         const expirationTime = new Date(
           new Date().getTime() + data.expiresIn * 1000
         );
@@ -43,11 +48,17 @@ const Auth = () => {
         return navigate("/");
       })
       .catch((err) => {
-        alert(err.message);
+        alert(err);
       });
   };
 
-  return <AuthForm loginPage={isLogin} onAuthenticate={authenticateHandler} />;
+  return (
+    <AuthForm
+      loginPage={isLogin}
+      onAuthenticate={authenticateHandler}
+      loading={isLoading}
+    />
+  );
 };
 
 export default Auth;
