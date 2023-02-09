@@ -19,6 +19,16 @@ const MainNavigation = () => {
       <div className={classes.logo}>Planner</div>
       <nav className={classes.nav}>
         <ul className={classes.menu}>
+        <li>
+            <NavLink
+              to="/schedule"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              Schedule
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="/todos"
