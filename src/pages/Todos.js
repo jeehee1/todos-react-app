@@ -51,7 +51,7 @@ const Todos = (props) => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      return navigate("/auth");
+      return navigate("/auth?mode=login");
     }
     else if (user) {
       sendRequest(

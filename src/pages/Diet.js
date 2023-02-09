@@ -15,7 +15,7 @@ const Diet = () => {
 
   useEffect(() => {
     if (!authCtx.isLoggedIn) {
-      return navigate("/auth");
+      return navigate("/auth?mode=login");
     }
   }, []);
 
