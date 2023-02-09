@@ -11,7 +11,7 @@ const MainNavigation = () => {
 
   const logoutHandler = () => {
     authCtx.logout();
-    return navigate("/");
+    return navigate("/auth?mode=login");
   };
   
   return (
