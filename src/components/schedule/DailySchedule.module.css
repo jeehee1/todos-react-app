@@ -1,0 +1,25 @@
+.schedule {
+    border: 1px solid #909090;
+    text-align: center;
+}
+
+.schedule td {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.time {
+    width: 20%
+}
+
+.time p{
+    border: 1px solid #909090;
+    margin: 0;
+    text-align: center;
+}
+
+.list {
+    width: 80%;
+    border: 1px solid #909090;
+}
+/*  */

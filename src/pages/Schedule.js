@@ -1,5 +1,7 @@
+import DailySchedule from "../components/schedule/DailySchedule";
+
 const Schedule = () => {
-    return <p>Schedule</p>
+    return <DailySchedule/>
 }
 
 export default Schedule;
