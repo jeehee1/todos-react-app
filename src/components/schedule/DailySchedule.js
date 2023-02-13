@@ -1,20 +1,21 @@
 import classes from "./DailySchedule.module.css";
 import { Fragment } from "react";
+import useHttp from "../../hooks/http";
+import { useEffect } from "react";
 
 const DailySchedule = () => {
-  const timeList = [];
-  let time;
-  for (let i = 0; i < 24; i++) {
-    timeList.push(
-      <p>
-        {i < 9
-          ? `0${i}:00 ~ 0${i + 1}:00`
-          : i === 9
-          ? `0${i}:00 ~ ${i + 1}:00`
-          : `${i}:00 ~ ${i + 1}:00`}
-      </p>
+  const { sendRequest, loading, error, data } = useHttp();
+  const date = null;
+
+  useEffect(() => {
+    sendRequest(
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${date}.json`,
+      "GET",
+      null,
+      null,
+      "GET_SCHEDULES"
     );
-  }
+  }, sendRequest);
 
   return (
     <Fragment>
