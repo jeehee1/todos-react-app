@@ -5,7 +5,7 @@ const SearchSchedule = (props) => {
 
   const submitSearchHandler = (event) => {
     event.preventDefault();
-    props.onSelectDate(dateRef.current.value);
+    props.onGetSchedule(dateRef.current.value);
   };
 
   return (

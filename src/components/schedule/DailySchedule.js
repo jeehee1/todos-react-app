@@ -1,98 +1,67 @@
 import classes from "./DailySchedule.module.css";
 import { Fragment } from "react";
-import useHttp from "../../hooks/http";
-import { useEffect } from "react";
 
-const DailySchedule = () => {
-  const { sendRequest, loading, error, data } = useHttp();
-  const date = null;
+const DailySchedule = (props) => {
+  const scheduleList = [];
+  const schedules = props.schedules;
+  console.log(schedules);
+  const example = schedules.map((data) => data.start > 3);
+  console.log(example);
 
-  useEffect(() => {
-    sendRequest(
-      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${date}.json`,
-      "GET",
-      null,
-      null,
-      "GET_SCHEDULES"
-    );
-  }, sendRequest);
+  // for (let i = 0; i < 24; i++) {
+  //   if (schedules) {
+  //     for (const schedule of schedules) {
+  //       if (schedule.start === i) {
+  //         <tr>
+  //           <th>{`${i}:00`}</th>
+  //           <td rowSpan={schedule.end - schedule.start}>{schedule.schedule}</td>
+  //         </tr>;
+  //       } else {
+  //       <tr>
+  //         <th>{`${i}:00`}</th>
+  //         <td></td>
+  //       </tr>;
+  //     }
+  //   }
+  //   scheduleList.push(
+  //     <tr>
+  //       <th>{`${i}:00`}</th>
+  //       <td></td>
+  //     </tr>
+  //   );
+  // }
 
   return (
     <Fragment>
       <h4>2023-2-1 Monday</h4>
       <div className={classes.schedule}>
-        {/* <div className={classes.time}>{timeList}</div> */}
         <table>
-          <tbody className={classes.schedule}>
+          {/* <tbody className={classes.schedule}>{scheduleList}</tbody> */}
+
+          <tbody>
             <tr>
-              <th>7:00</th>
-              <td>asdfa</td>
+              <th>1</th>
+              <td rowSpan="3">sdfaw</td>
             </tr>
             <tr>
-              <th>8:00</th>
-              <td>asdfa</td>
+              <th>2</th>
             </tr>
             <tr>
-              <th>9:00</th>
-              <td>asdfa</td>
+              <th>3</th>
             </tr>
             <tr>
-              <th>10:00</th>
-              <td rowSpan="3">asdfa</td>
+              <th>4</th>
+              <td>skdfjlaw</td>
             </tr>
             <tr>
-              <th>11:00</th>
+              <th>5</th>
             </tr>
             <tr>
-              <th>12:00</th>
+              <th>6</th>
             </tr>
             <tr>
-              <th>13:00</th>
-              <td>asdfa</td>
-            </tr>
-            <tr>
-              <th>14:00</th>
-              <td>asdfa</td>
-            </tr>
-            <tr>
-              <th>15:00</th>
-              <td>asdfa</td>
-            </tr>
-            <tr>
-              <th>16:00</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>17:00</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>18:00</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>19:00</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>20:00</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>21:00</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>22:00</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>23:00</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>24:00</th>
-              <td></td>
+              <th>7</th>
+              <td>klajfekl</td>
             </tr>
           </tbody>
         </table>
