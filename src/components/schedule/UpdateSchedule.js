@@ -2,12 +2,13 @@ import { useState, useRef } from "react";
 import useHttp from "../../hooks/http";
 import Select from "react-select";
 
+const timeOptions = [];
+for (let i = 6; i < 24; i++) {
+  timeOptions.push({ value: i, label: i });
+}
+
 const UpdateSchedule = () => {
   const { sendRequest, loading, error } = useHttp();
-  const timeOptions = [];
-  for (let i = 6; i < 24; i++) {
-    timeOptions.push({ value: i, label: i });
-  }
   const dateRef = useRef();
   const scheduleRef = useRef();
   const [selectedStartTime, setSelectedStartTime] = useState();

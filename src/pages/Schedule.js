@@ -11,8 +11,10 @@ const Schedule = (props) => {
   const { sendRequest, loading, error, data, identifier } = useHttp();
   const [selectedDate, setSelectedDate] = useState();
   const [schedules, setSchedules] = useState([]);
-
+  console.log(selectedDate);
+  console.log(data);
   const getScheduleHandler = (date) => {
+    setSelectedDate(date);
     sendRequest(
       `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${date}.json`,
       "GET",
@@ -22,11 +24,25 @@ const Schedule = (props) => {
     );
   };
 
+  // const updateSchedulesHandler = (schedule) => {
+  //   sendRequest(
+  //     `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}.json`,
+  //     "POST",
+  //     JSON.stringify(schedule),
+  //     null,
+  //     "UPDATE_SCHEDULES"
+  //   );
+  // };
+
   useEffect(() => {
     if (identifier === "GET_SCHEDULES") {
       const transformedSchedules = [];
       for (const key in data) {
-        transformedSchedules.push({ ...data[key] });
+        const timeArray = [];
+        for (let i = data[key].start; i < data[key].end; i++) {
+          timeArray.push(i);
+        }
+        transformedSchedules.push({ ...data[key], time: timeArray });
       }
       setSchedules(transformedSchedules);
     }
