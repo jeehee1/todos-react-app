@@ -10,10 +10,6 @@ const DailySchedule = (props) => {
   for (let i = 0; i < 24; i++) {
     if (schedules) {
       const matchedTime = schedules.filter((data) => data.start === i);
-      // if (matchedTime.length > 0) {
-      //   console.log(matchedTime[0]);
-      //   console.log(matchedTime[0].end - matchedTime[0].start);
-      // }
       matchedTime.length > 0
         ? scheduleList.push(
             <tr>
@@ -29,16 +25,15 @@ const DailySchedule = (props) => {
             </tr>
           );
     } else {
-      <tr>
+      scheduleList.push(<tr>
         <th>{`${i}:00`}</th>
-      </tr>;
+      </tr>);
     }
   }
   console.log(scheduleList);
 
   return (
     <Fragment>
-      <h4>2023-2-1 Monday</h4>
       <div className={classes.schedule}>
         <table>
           <tbody className={classes.schedule}>{scheduleList}</tbody>

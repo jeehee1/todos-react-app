@@ -24,7 +24,8 @@ const getToday = () => {
 const Schedule = (props) => {
   const formattedToday = getToday();
   const { sendRequest, loading, error, data, identifier } = useHttp();
-  const [selectedDate, setSelectedDate] = useState(formattedToday);
+  const [update, setUpdate] = useState(false);
+  const [selectedDate, setSelectedDate] = useState();
   const [schedules, setSchedules] = useState();
 
   const getScheduleHandler = (date) => {
@@ -60,20 +61,36 @@ const Schedule = (props) => {
   useEffect(() => {
     if (identifier === "GET_SCHEDULES") {
       const transformedSchedules = [];
-      for (const key in data) {
-        const timeArray = [];
-        transformedSchedules.push({ ...data[key], key: key });
+      if (data) {
+        for (const key in data) {
+          const timeArray = [];
+          transformedSchedules.push({ ...data[key], key: key });
+        }
+        setSchedules(transformedSchedules);
       }
-      setSchedules(transformedSchedules);
+    } else {
+      setSchedules(null);
     }
   }, [data]);
 
   console.log(schedules);
 
+
   return (
     <Fragment>
-      <SearchSchedule onGetSchedule={getScheduleHandler} />
-      <UpdateSchedule onUpdateSchedules={updateSchedulesHandler} />
+      <SearchSchedule
+        onGetSchedule={getScheduleHandler}
+        initialDate={formattedToday}
+      />
+      <h4>{selectedDate}</h4>
+      <button
+        onClick={() => {
+          setUpdate(true);
+        }}
+      >
+        Update
+      </button>
+      {update && <UpdateSchedule onUpdateSchedules={updateSchedulesHandler} onCloseUpdate={() => {setUpdate(false)}}/>}
       <DailySchedule schedules={schedules} />
     </Fragment>
   );

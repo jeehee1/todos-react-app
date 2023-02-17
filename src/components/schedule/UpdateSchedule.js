@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import useHttp from "../../hooks/http";
 import Select from "react-select";
+import { Fragment } from "react";
 
 const timeOptions = [];
 for (let i = 6; i < 24; i++) {
@@ -29,29 +30,32 @@ const UpdateSchedule = (props) => {
   };
 
   return (
-    <form onSubmit={updateScheduleHandler}>
-      <label id="startTime">Start Time</label>
-      <Select
-        id="startTime"
-        value={selectedStartTime}
-        onChange={(selectedValue) => {
-          setSelectedStartTime(selectedValue);
-        }}
-        options={timeOptions}
-      />
-      <label id="endTime">End Time</label>
-      <Select
-        id="endTime"
-        value={selectedEndTime}
-        onChange={(selectedValue) => {
-          setSelectedEndTime(selectedValue);
-        }}
-        options={timeOptions}
-      />
-      <label id="schedule">Schedule</label>
-      <input id="schedule" type="text" ref={scheduleRef} />
-      <button>Submit</button>
-    </form>
+    <Fragment>
+      <form onSubmit={updateScheduleHandler}>
+        <label id="startTime">Start Time</label>
+        <Select
+          id="startTime"
+          value={selectedStartTime}
+          onChange={(selectedValue) => {
+            setSelectedStartTime(selectedValue);
+          }}
+          options={timeOptions}
+        />
+        <label id="endTime">End Time</label>
+        <Select
+          id="endTime"
+          value={selectedEndTime}
+          onChange={(selectedValue) => {
+            setSelectedEndTime(selectedValue);
+          }}
+          options={timeOptions}
+        />
+        <label id="schedule">Schedule</label>
+        <input id="schedule" type="text" ref={scheduleRef} />
+        <button>Submit</button>
+      </form>
+      <button onClick={props.onCloseUpdate}>close Update</button>
+    </Fragment>
   );
 };
 
