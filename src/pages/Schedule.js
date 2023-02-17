@@ -7,6 +7,10 @@ import SearchSchedule from "../components/schedule/SearchSchedule";
 import UpdateSchedule from "../components/schedule/UpdateSchedule";
 import useHttp from "../hooks/http";
 
+const isTimeDuplicated = (time, comparedTime) => {
+  return time.some((t) => comparedTime.includes(t));
+};
+
 const Schedule = (props) => {
   const { sendRequest, loading, error, data, identifier } = useHttp();
   const [selectedDate, setSelectedDate] = useState();
@@ -24,25 +28,31 @@ const Schedule = (props) => {
     );
   };
 
-  // const updateSchedulesHandler = (schedule) => {
-  //   sendRequest(
-  //     `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}.json`,
-  //     "POST",
-  //     JSON.stringify(schedule),
-  //     null,
-  //     "UPDATE_SCHEDULES"
-  //   );
-  // };
+  const updateSchedulesHandler = (newSchedule) => {
+    for (const schedule of schedules) {
+      console.log(newSchedule.time);
+      console.log(schedule.time);
+      const isDuplicated = isTimeDuplicated(newSchedule.time, schedule.time);
+      if (isDuplicated) {
+        alert("Time duplicated. Delete the schedule first.");
+        return;
+      }
+    }
+    sendRequest(
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}.json`,
+      "POST",
+      JSON.stringify(newSchedule),
+      null,
+      "UPDATE_SCHEDULES"
+    );
+  };
 
   useEffect(() => {
     if (identifier === "GET_SCHEDULES") {
       const transformedSchedules = [];
       for (const key in data) {
         const timeArray = [];
-        for (let i = data[key].start; i < data[key].end; i++) {
-          timeArray.push(i);
-        }
-        transformedSchedules.push({ ...data[key], time: timeArray });
+        transformedSchedules.push({ ...data[key], key: key });
       }
       setSchedules(transformedSchedules);
     }
@@ -53,7 +63,7 @@ const Schedule = (props) => {
   return (
     <Fragment>
       <SearchSchedule onGetSchedule={getScheduleHandler} />
-      <UpdateSchedule />
+      <UpdateSchedule onUpdateSchedules={updateSchedulesHandler} />
       <DailySchedule schedules={schedules} />
     </Fragment>
   );

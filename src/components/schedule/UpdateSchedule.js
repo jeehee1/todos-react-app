@@ -7,34 +7,29 @@ for (let i = 6; i < 24; i++) {
   timeOptions.push({ value: i, label: i });
 }
 
-const UpdateSchedule = () => {
-  const { sendRequest, loading, error } = useHttp();
-  const dateRef = useRef();
+const UpdateSchedule = (props) => {
   const scheduleRef = useRef();
   const [selectedStartTime, setSelectedStartTime] = useState();
   const [selectedEndTime, setSelectedEndTime] = useState();
 
   const updateScheduleHandler = (event) => {
     event.preventDefault();
-    const selectedDate = dateRef.current.value;
     const scheduleDetail = scheduleRef.current.value;
-    sendRequest(
-      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}.json`,
-      "POST",
-      JSON.stringify({
-        start: selectedStartTime.value,
-        end: selectedEndTime.value,
-        schedule: scheduleDetail,
-      }),
-      null,
-      "UPDATE_SCHEDULE"
-    );
+    const time = [];
+    for (let i = selectedStartTime.value; i < selectedEndTime.value; i++) {
+      time.push(i);
+    }
+    console.log(time);
+    props.onUpdateSchedules({
+      start: selectedStartTime.value,
+      end: selectedEndTime.value,
+      time: time,
+      schedule: scheduleDetail,
+    });
   };
 
   return (
     <form onSubmit={updateScheduleHandler}>
-      <label id="date">Date</label>
-      <input id="date" type="date" ref={dateRef} />
       <label id="startTime">Start Time</label>
       <Select
         id="startTime"
