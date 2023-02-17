@@ -11,12 +11,22 @@ const isTimeDuplicated = (time, comparedTime) => {
   return time.some((t) => comparedTime.includes(t));
 };
 
+const getToday = () => {
+  const today = new Date();
+  const todayYear = today.getFullYear();
+  const todayMonth =
+    today.getMonth() < 10 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+  const todayDate = today.getDate();
+  const formattedToday = `${todayYear}-${todayMonth}-${todayDate}`;
+  return formattedToday;
+};
+
 const Schedule = (props) => {
+  const formattedToday = getToday();
   const { sendRequest, loading, error, data, identifier } = useHttp();
-  const [selectedDate, setSelectedDate] = useState();
-  const [schedules, setSchedules] = useState([]);
-  console.log(selectedDate);
-  console.log(data);
+  const [selectedDate, setSelectedDate] = useState(formattedToday);
+  const [schedules, setSchedules] = useState();
+
   const getScheduleHandler = (date) => {
     setSelectedDate(date);
     sendRequest(

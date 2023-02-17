@@ -5,8 +5,7 @@ const DailySchedule = (props) => {
   const scheduleList = [];
   const schedules = props.schedules;
   console.log(schedules);
-  const example = schedules.map((data) => data.start > 3);
-  console.log(example);
+
 
   for (let i = 0; i < 24; i++) {
     if (schedules) {
