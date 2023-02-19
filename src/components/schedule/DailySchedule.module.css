@@ -1,37 +1,51 @@
-.schedule {
-    border: 1px solid #909090;
-    text-align: center;
-    color: #323232;
+.table {
+  border: 3px solid #1d3632;
+  text-align: center;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  padding: 0.2rem 0.2rem;
+  width: 100%
 }
 
-.schedule th {
-    font: inherit;
-    font-weight: bold;
-    padding: 0.3rem;
+.table tr {
+  padding: 0 1rem;
 }
 
-.schedule td {
-    border: 1px solid black;
-    width: 100%;
+.table th {
+  background-color: #541414;
+  color: #e1e1e1;
+  border: 1px solid #541414;
+  border-radius: 4px;
+  font: inherit;
+  font-weight: bold;
+  padding: 0.3rem;
+}
+
+.table td {
+  border: 1px solid #3f8b8b;
+  background-color: #3f8b8b;
+  border-radius: 4px;
+  color: #e1e1e1;
+  width: 90%;
 }
 
 .table p {
-    display: inline;
-    padding: 0 1rem;
+  display: inline;
+  padding: 0 1rem;
+  font-weight: bold;
 }
 
-
-.time {
-    width: 20%
+.table button {
+  color: #873030;
+  font: inherit;
+  background-color: #fbc1c1;
+  border: 1px solid #fbc1c1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
 }
 
-.time p{
-    border: 1px solid #909090;
-    margin: 0;
-    text-align: center;
-}
-
-.list {
-    width: 80%;
-    border: 1px solid #909090;
+.table button:hover,
+.table button:active {
+  cursor: pointer;
+  color: #892525;
 }

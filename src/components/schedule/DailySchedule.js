@@ -37,11 +37,9 @@ const DailySchedule = (props) => {
 
   return (
     <Fragment>
-      <div className={classes.schedule}>
         <table className={classes.table}>
           <tbody className={classes.schedule}>{scheduleList}</tbody>
         </table>
-      </div>
     </Fragment>
   );
 };
