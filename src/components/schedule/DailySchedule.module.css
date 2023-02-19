@@ -1,12 +1,25 @@
 .schedule {
     border: 1px solid #909090;
     text-align: center;
+    color: #323232;
+}
+
+.schedule th {
+    font: inherit;
+    font-weight: bold;
+    padding: 0.3rem;
 }
 
 .schedule td {
     border: 1px solid black;
     width: 100%;
 }
+
+.table p {
+    display: inline;
+    padding: 0 1rem;
+}
+
 
 .time {
     width: 20%
@@ -22,4 +35,3 @@
     width: 80%;
     border: 1px solid #909090;
 }
-/*  */

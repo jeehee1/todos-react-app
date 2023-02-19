@@ -18,7 +18,7 @@ const DailySchedule = (props) => {
               <th>{`${i}:00`}</th>
               <td rowSpan={matchedTimeSchedule[0].end - matchedTimeSchedule[0].start}>
                 <p>{matchedTimeSchedule[0].schedule}</p>
-                <button onClick={() => {props.onDeleteSchedule(matchedTimeSchedule[0].key)}}>delete</button>
+                {props.isUpdating&&<button onClick={() => {props.onDeleteSchedule(matchedTimeSchedule[0].key)}}>delete</button>}
               </td>
             </tr>
           )
@@ -38,7 +38,7 @@ const DailySchedule = (props) => {
   return (
     <Fragment>
       <div className={classes.schedule}>
-        <table>
+        <table className={classes.table}>
           <tbody className={classes.schedule}>{scheduleList}</tbody>
         </table>
       </div>

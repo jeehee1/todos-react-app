@@ -130,6 +130,7 @@ const Schedule = (props) => {
       <DailySchedule
         schedules={schedules}
         onDeleteSchedule={deleteScheduleHandler}
+        isUpdating = {update}
       />
     </Fragment>
   );
