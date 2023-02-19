@@ -1,4 +1,6 @@
+import classes from "./SearchSchedule.module.css";
 import { useRef } from "react";
+import Card from "../../layout/Card";
 
 const SearchSchedule = (props) => {
   const dateRef = useRef();
@@ -10,11 +12,15 @@ const SearchSchedule = (props) => {
   };
 
   return (
-    <form onSubmit={submitSearchHandler}>
-      <label id="date">Search Date</label>
-      <input type="date" id="date" ref={dateRef} />
-      <button>Search</button>
-    </form>
+    <Card>
+      <form onSubmit={submitSearchHandler}>
+        <div className={classes.search}>
+        <label id="date">Search Date</label>
+        <input type="date" id="date" ref={dateRef} />
+        <button>Search</button>
+        </div>
+      </form>
+    </Card>
   );
 };
 

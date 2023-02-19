@@ -1,0 +1,33 @@
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #444141;
+}
+.search label {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.search input {
+  padding: 0.6rem 1rem;
+  width: 60%;
+  margin: 0 1rem;
+}
+
+.search button {
+  padding: 0.6rem 1rem;
+  font: inherit;
+  color: white;
+  background-color: #265454;
+  border: 1px solid #265454;
+  border-radius: 4px;
+}
+
+.search button:hover, search button:active {
+    cursor: pointer;
+    background-color: #1d3f3f;
+    border: 1px solid #1d3f3f;
+    color: #eaeaea;
+}
