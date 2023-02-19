@@ -1,23 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 const SearchSchedule = (props) => {
   const dateRef = useRef();
-  const today = props.initialDate;
 
   const submitSearchHandler = (event) => {
     event.preventDefault();
-    props.onGetSchedule(dateRef.current.value);
+    props.onGetSchedules(dateRef.current.value);
+    console.log(dateRef.current.value);
   };
-
-  useEffect(() => {
-    console.log('search')
-    props.onGetSchedule(today);
-  }, []);
 
   return (
     <form onSubmit={submitSearchHandler}>
       <label id="date">Search Date</label>
-      <input type="date" id="date" ref={dateRef}/>
+      <input type="date" id="date" ref={dateRef} />
       <button>Search</button>
     </form>
   );

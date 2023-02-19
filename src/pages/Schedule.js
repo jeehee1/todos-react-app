@@ -23,12 +23,12 @@ const getToday = () => {
 
 const Schedule = (props) => {
   const formattedToday = getToday();
-  const { sendRequest, loading, error, data, identifier } = useHttp();
+  const { sendRequest, loading, error, data, identifier, extra } = useHttp();
   const [update, setUpdate] = useState(false);
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState(formattedToday);
   const [schedules, setSchedules] = useState();
 
-  const getScheduleHandler = (date) => {
+  const getSchedulesHandler = (date) => {
     setSelectedDate(date);
     sendRequest(
       `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${date}.json`,
@@ -39,24 +39,46 @@ const Schedule = (props) => {
     );
   };
 
+  useEffect(() => {
+    getSchedulesHandler(selectedDate);
+  }, []);
+
   const updateSchedulesHandler = (newSchedule) => {
-    for (const schedule of schedules) {
-      console.log(newSchedule.time);
-      console.log(schedule.time);
-      const isDuplicated = isTimeDuplicated(newSchedule.time, schedule.time);
-      if (isDuplicated) {
-        alert("Time duplicated. Delete the schedule first.");
-        return;
+    if (schedules) {
+      for (const schedule of schedules) {
+        console.log(newSchedule.time);
+        console.log(schedule.time);
+        const isDuplicated = isTimeDuplicated(newSchedule.time, schedule.time);
+        if (isDuplicated) {
+          alert("Time duplicated. Delete the schedule first.");
+          return;
+        }
       }
     }
     sendRequest(
       `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}.json`,
       "POST",
       JSON.stringify(newSchedule),
-      null,
+      newSchedule,
       "UPDATE_SCHEDULES"
     );
   };
+
+  const deleteScheduleHandler = useCallback(
+    (key) => {
+      console.log(
+        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}/${key}.json`
+      );
+      sendRequest(
+        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}/${key}.json`,
+        "DELETE",
+        null,
+        key,
+        "DELETE_SCHEDULE"
+      );
+    },
+    [sendRequest]
+  );
 
   useEffect(() => {
     if (identifier === "GET_SCHEDULES") {
@@ -67,21 +89,26 @@ const Schedule = (props) => {
           transformedSchedules.push({ ...data[key], key: key });
         }
         setSchedules(transformedSchedules);
+      } else {
+        setSchedules(null);
       }
-    } else {
-      setSchedules(null);
+    } else if (identifier === "DELETE_SCHEDULE") {
+      const existingSchedule = schedules.filter(
+        (schedule) => schedule.key !== extra
+      );
+      setSchedules(existingSchedule);
+    } else if (identifier === "UPDATE_SCHEDULES") {
+      const newSchedule = { key: data.name, ...extra };
+      const oldSchedules = schedules;
+      setSchedules([...oldSchedules, newSchedule]);
     }
-  }, [data]);
+  }, [data, identifier, extra, setSchedules]);
 
   console.log(schedules);
 
-
   return (
     <Fragment>
-      <SearchSchedule
-        onGetSchedule={getScheduleHandler}
-        initialDate={formattedToday}
-      />
+      <SearchSchedule onGetSchedules={getSchedulesHandler} />
       <h4>{selectedDate}</h4>
       <button
         onClick={() => {
@@ -90,8 +117,18 @@ const Schedule = (props) => {
       >
         Update
       </button>
-      {update && <UpdateSchedule onUpdateSchedules={updateSchedulesHandler} onCloseUpdate={() => {setUpdate(false)}}/>}
-      <DailySchedule schedules={schedules} />
+      {update && (
+        <UpdateSchedule
+          onUpdateSchedules={updateSchedulesHandler}
+          onCloseUpdate={() => {
+            setUpdate(false);
+          }}
+        />
+      )}
+      <DailySchedule
+        schedules={schedules}
+        onDeleteSchedule={deleteScheduleHandler}
+      />
     </Fragment>
   );
 };
