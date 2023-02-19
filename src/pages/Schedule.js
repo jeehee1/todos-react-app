@@ -110,13 +110,15 @@ const Schedule = (props) => {
     <Fragment>
       <SearchSchedule onGetSchedules={getSchedulesHandler} />
       <h4>{selectedDate}</h4>
-      <button
-        onClick={() => {
-          setUpdate(true);
-        }}
-      >
-        Update
-      </button>
+      {!update && (
+        <button
+          onClick={() => {
+            setUpdate(true);
+          }}
+        >
+          Update
+        </button>
+      )}
       {update && (
         <UpdateSchedule
           onUpdateSchedules={updateSchedulesHandler}
