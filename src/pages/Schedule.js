@@ -1,3 +1,4 @@
+import classes from "./Schedule.module.css";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -97,10 +98,10 @@ const Schedule = (props) => {
     } else if (identifier === "UPDATE_SCHEDULES") {
       const newSchedule = { key: data.name, ...extra };
       const oldSchedules = schedules;
-      if(oldSchedules) {
+      if (oldSchedules) {
         setSchedules([...oldSchedules, newSchedule]);
       } else {
-        setSchedules([newSchedule])
+        setSchedules([newSchedule]);
       }
     }
   }, [data, identifier, extra, setSchedules]);
@@ -110,16 +111,19 @@ const Schedule = (props) => {
   return (
     <Fragment>
       <SearchSchedule onGetSchedules={getSchedulesHandler} />
-      <h4>{selectedDate}</h4>
-      {!update && (
-        <button
-          onClick={() => {
-            setUpdate(true);
-          }}
-        >
-          Update
-        </button>
-      )}
+      <div className={classes.info}>
+        <h4 className={classes.date}>{selectedDate}</h4>
+        {!update && (
+          <button
+            className={classes.updatebtn}
+            onClick={() => {
+              setUpdate(true);
+            }}
+          >
+            Update
+          </button>
+        )}
+      </div>
       {update && (
         <UpdateSchedules
           onUpdateSchedules={updateSchedulesHandler}
@@ -131,7 +135,7 @@ const Schedule = (props) => {
       <DailySchedule
         schedules={schedules}
         onDeleteSchedule={deleteScheduleHandler}
-        isUpdating = {update}
+        isUpdating={update}
       />
     </Fragment>
   );

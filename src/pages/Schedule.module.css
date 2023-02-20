@@ -1,0 +1,26 @@
+.info {
+    display: block;
+}
+.date {
+  margin: 1rem;
+  font-size: 2rem;
+  text-align: center;
+  color: #303030;
+}
+
+.updatebtn {
+    justify-content: end;
+    padding: 0.4rem 1rem;
+    background-color: #1d3f3f;
+    border: solid 1px #1d3f3f;
+    border-radius: 4px;
+    font: inherit;
+    font-weight: bold;
+    color: #eaeaea;
+}
+.updatebtn:hover,
+.updatebtn:active {
+    background-color: #3a1e12;
+    border: 1px solid #3a1e12;
+    cursor: pointer;
+}

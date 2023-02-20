@@ -35,7 +35,8 @@
 .schedule input {
     font: inherit;
     display: flexbox;
-    width: 100%;
+    width: 80%;
+    margin: 0.1rem;
     padding: 0.2rem 0.5rem;
 }
 
