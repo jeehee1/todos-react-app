@@ -30,6 +30,7 @@ const DailySchedule = (props) => {
     } else {
       scheduleList.push(<tr>
         <th>{`${i}:00`}</th>
+        <td></td>
       </tr>);
     }
   }

@@ -3,15 +3,14 @@
   text-align: center;
   border-radius: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-  padding: 0.2rem 0.2rem;
-  width: 100%
+  padding: 0.2rem;
+  empty-cells: hide;
+  width: 100%;
 }
 
-.table tr {
-  padding: 0 1rem;
-}
 
 .table th {
+  display: inline-box;
   background-color: #541414;
   color: #e1e1e1;
   border: 1px solid #541414;
@@ -19,9 +18,11 @@
   font: inherit;
   font-weight: bold;
   padding: 0.3rem;
+  width: 10%;
 }
 
 .table td {
+  display: inline-box;
   border: 1px solid #3f8b8b;
   background-color: #3f8b8b;
   border-radius: 4px;
