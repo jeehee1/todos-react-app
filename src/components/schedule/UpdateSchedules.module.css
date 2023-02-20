@@ -1,0 +1,57 @@
+.update {
+    color: #323232;
+    text-align: center;
+}
+
+.date{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.update label{
+    font: inherit;
+    width: 6rem;
+    font-weight: bold;
+}
+
+.date .select {
+    width: 30%;
+}
+
+.schedule {
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.schedule label {
+    width: 6rem;
+    margin: 0 0.2rem 0 0;
+}
+
+.schedule input {
+    font: inherit;
+    display: flexbox;
+    width: 100%;
+    padding: 0.2rem 0.5rem;
+}
+
+.update button {
+    padding: 0.5rem 1rem;
+    background-color: #1d3f3f;
+    border: solid 1px #1d3f3f;
+    border-radius: 4px;
+    font: inherit;
+    font-weight: bold;
+    color: #eaeaea;
+    margin: 1rem;
+}
+.update button:hover,
+.update button:active {
+    background-color: #3a1e12;
+    border: 1px solid #3a1e12;
+    cursor: pointer;
+}

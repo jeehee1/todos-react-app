@@ -19,7 +19,8 @@
 .search button {
   padding: 0.6rem 1rem;
   font: inherit;
-  color: white;
+  font-weight: bold;
+  color: #eaeaea;
   background-color: #265454;
   border: 1px solid #265454;
   border-radius: 4px;

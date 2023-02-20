@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Fragment } from "react";
 import DailySchedule from "../components/schedule/DailySchedule";
 import SearchSchedule from "../components/schedule/SearchSchedule";
-import UpdateSchedule from "../components/schedule/UpdateSchedule";
+import UpdateSchedules from "../components/schedule/UpdateSchedules";
 import useHttp from "../hooks/http";
 
 const isTimeDuplicated = (time, comparedTime) => {
@@ -121,7 +121,7 @@ const Schedule = (props) => {
         </button>
       )}
       {update && (
-        <UpdateSchedule
+        <UpdateSchedules
           onUpdateSchedules={updateSchedulesHandler}
           onCloseUpdate={() => {
             setUpdate(false);
