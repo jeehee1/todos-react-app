@@ -66,9 +66,6 @@ const Schedule = (props) => {
 
   const deleteScheduleHandler = useCallback(
     (key) => {
-      console.log(
-        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}/${key}.json`
-      );
       sendRequest(
         `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}/${key}.json`,
         "DELETE",
@@ -100,7 +97,11 @@ const Schedule = (props) => {
     } else if (identifier === "UPDATE_SCHEDULES") {
       const newSchedule = { key: data.name, ...extra };
       const oldSchedules = schedules;
-      setSchedules([...oldSchedules, newSchedule]);
+      if(oldSchedules) {
+        setSchedules([...oldSchedules, newSchedule]);
+      } else {
+        setSchedules([newSchedule])
+      }
     }
   }, [data, identifier, extra, setSchedules]);
 
