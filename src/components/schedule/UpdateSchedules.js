@@ -14,8 +14,13 @@ const UpdateSchedules = (props) => {
   const [selectedEndTime, setSelectedEndTime] = useState();
 
   const updateScheduleHandler = (event) => {
+    console.log(selectedStartTime)
+    console.log(selectedEndTime)
     event.preventDefault();
     const scheduleDetail = scheduleRef.current.value;
+    if (selectedStartTime.value >= selectedEndTime.value) {
+      return alert("Start time should be ealier than end time");
+    }
     const time = [];
     for (let i = selectedStartTime.value; i < selectedEndTime.value; i++) {
       time.push(i);
@@ -60,7 +65,9 @@ const UpdateSchedules = (props) => {
             <input id="schedule" type="text" ref={scheduleRef} />
           </div>
           <button>Submit</button>
-          <button className={classes.closebtn} onClick={props.onCloseUpdate}>close Update</button>
+          <button className={classes.closebtn} onClick={props.onCloseUpdate}>
+            close Update
+          </button>
         </div>
       </form>
     </Card>
