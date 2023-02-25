@@ -4,7 +4,7 @@ import Select from "react-select";
 import Card from "../../layout/Card";
 
 const timeOptions = [];
-for (let i = 6; i < 24; i++) {
+for (let i = 0; i < 25; i++) {
   timeOptions.push({ value: i, label: i });
 }
 
@@ -14,8 +14,8 @@ const UpdateSchedules = (props) => {
   const [selectedEndTime, setSelectedEndTime] = useState();
 
   const updateScheduleHandler = (event) => {
-    console.log(selectedStartTime)
-    console.log(selectedEndTime)
+    console.log(selectedStartTime);
+    console.log(selectedEndTime);
     event.preventDefault();
     const scheduleDetail = scheduleRef.current.value;
     if (selectedStartTime.value >= selectedEndTime.value) {

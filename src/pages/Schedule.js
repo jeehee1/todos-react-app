@@ -1,5 +1,5 @@
 import classes from "./Schedule.module.css";
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Fragment } from "react";
@@ -7,6 +7,8 @@ import DailySchedule from "../components/schedule/DailySchedule";
 import SearchSchedule from "../components/schedule/SearchSchedule";
 import UpdateSchedules from "../components/schedule/UpdateSchedules";
 import useHttp from "../hooks/http";
+import AuthContext from "../store/auth-context";
+import { useNavigate } from "react-router-dom";
 
 const isTimeDuplicated = (time, comparedTime) => {
   return time.some((t) => comparedTime.includes(t));
@@ -23,16 +25,18 @@ const getToday = () => {
 };
 
 const Schedule = (props) => {
+  const { isLoggedIn, user } = useContext(AuthContext);
   const formattedToday = getToday();
   const { sendRequest, loading, error, data, identifier, extra } = useHttp();
   const [update, setUpdate] = useState(false);
   const [selectedDate, setSelectedDate] = useState(formattedToday);
   const [schedules, setSchedules] = useState();
+  const navigate = useNavigate();
 
   const getSchedulesHandler = (date) => {
     setSelectedDate(date);
     sendRequest(
-      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${date}.json`,
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${user}/${date}.json`,
       "GET",
       null,
       null,
@@ -41,7 +45,11 @@ const Schedule = (props) => {
   };
 
   useEffect(() => {
-    getSchedulesHandler(selectedDate);
+    if (isLoggedIn) {
+      getSchedulesHandler(selectedDate);
+    } else {
+      return navigate("/auth?mode=login");
+    }
   }, []);
 
   const updateSchedulesHandler = (newSchedule) => {
@@ -57,7 +65,7 @@ const Schedule = (props) => {
       }
     }
     sendRequest(
-      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}.json`,
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${user}/${selectedDate}.json`,
       "POST",
       JSON.stringify(newSchedule),
       newSchedule,
@@ -68,7 +76,7 @@ const Schedule = (props) => {
   const deleteScheduleHandler = useCallback(
     (key) => {
       sendRequest(
-        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${selectedDate}/${key}.json`,
+        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${user}/${selectedDate}/${key}.json`,
         "DELETE",
         null,
         key,
