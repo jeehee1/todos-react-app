@@ -9,6 +9,7 @@ import UpdateSchedules from "../components/schedule/UpdateSchedules";
 import useHttp from "../hooks/http";
 import AuthContext from "../store/auth-context";
 import { useNavigate } from "react-router-dom";
+import Layout from "../components/layout/Layout";
 
 const isTimeDuplicated = (time, comparedTime) => {
   return time.some((t) => comparedTime.includes(t));
@@ -117,7 +118,7 @@ const Schedule = (props) => {
   console.log(schedules);
 
   return (
-    <Fragment>
+    <Layout>
       <SearchSchedule onGetSchedules={getSchedulesHandler} />
       <div className={classes.info}>
         <h4 className={classes.date}>{selectedDate}</h4>
@@ -145,7 +146,7 @@ const Schedule = (props) => {
         onDeleteSchedule={deleteScheduleHandler}
         isUpdating={update}
       />
-    </Fragment>
+    </Layout>
   );
 };
 

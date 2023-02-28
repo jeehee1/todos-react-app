@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import SearchDiet from "../components/diets/SearchDiet";
 import WeeklyDiet from "../components/diets/WeeklyDiet";
 import AuthContext from "../store/auth-context";
+import Layout from "../components/layout/Layout";
 
 const Diet = () => {
   const authCtx = useContext(AuthContext);
@@ -20,8 +21,7 @@ const Diet = () => {
   }, []);
 
   return (
-    // <DietContextProvider>
-    <Fragment>
+    <Layout>
       <SearchDiet
         date={searchWeek}
         onSetStartDate={(week, date) => {
@@ -30,8 +30,7 @@ const Diet = () => {
         }}
       />
       {searchWeek && <WeeklyDiet date={dateOfWeek} week={searchWeek} />}
-    </Fragment>
-    // </DietContextProvider>
+    </Layout>
   );
 };
 

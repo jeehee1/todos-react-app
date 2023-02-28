@@ -22,16 +22,19 @@ const calculateRemainingTime = (expirationDate) => {
 const retrieveStoredToken = () => {
   const storedToken = localStorage.getItem("token");
   const storedExpirationDate = localStorage.getItem("expirationTime");
+  const storedUserId = localStorage.getItem('userId');
 
   const remainingTime = calculateRemainingTime(storedExpirationDate);
   if (remainingTime < 60000) {
     localStorage.removeItem("token");
     localStorage.removeItem("expirationTime");
+    localStorage.removeItem('userId');
     return null;
   }
 
   return {
     token: storedToken,
+    userId: storedUserId,
     duration: remainingTime,
   };
 };
@@ -46,26 +49,34 @@ const setUserReducer = (curUser, action) => {
 };
 
 export const AuthContextProvider = (props) => {
+  console.log("authContextProvider");
+
   const tokenData = retrieveStoredToken();
   let initialToken;
+  let initialUser
   if (tokenData) {
     initialToken = tokenData.token;
+    initialUser = tokenData.userId;
   }
   // const [token, setToken] = useState(initialToken);
   // const [userId, setUserId] = useState("");
 
   const [user, dispatch] = useReducer(setUserReducer, {
     token: initialToken,
-    userId: null,
+    userId: initialUser,
   });
+
+  console.log(user.token);
+  console.log(user.userId);
 
   const userIsLogggedIn = !!user.token;
 
   const loginHandler = (token, userId, expirationTime) => {
     console.log("login");
-    dispatch({ type: "SET", token: token, userId:userId });
     localStorage.setItem("token", token);
     localStorage.setItem("expirationTime", expirationTime);
+    localStorage.setItem("userId", userId);
+    dispatch({ type: "SET", token: token, userId: userId });
 
     const remainingTime = calculateRemainingTime(expirationTime);
 

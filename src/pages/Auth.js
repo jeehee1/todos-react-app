@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import AuthForm from "../components/auth/AuthForm";
 import AuthContext from "../store/auth-context";
+import Layout from "../components/layout/Layout";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
@@ -27,11 +28,11 @@ const Auth = () => {
     })
       .then((res) => {
         if (res.ok) {
-        return res.json();
+          return res.json();
         } else {
           return res.json().then((data) => {
-            console.log('data when error occured')
-            console.log(data)
+            console.log("data when error occured");
+            console.log(data);
             let errorMessage = data.error.message || "Authnetication failed";
             throw new Error(errorMessage);
           });
@@ -53,11 +54,13 @@ const Auth = () => {
   };
 
   return (
-    <AuthForm
-      loginPage={isLogin}
-      onAuthenticate={authenticateHandler}
-      loading={isLoading}
-    />
+    <Layout>
+      <AuthForm
+        loginPage={isLogin}
+        onAuthenticate={authenticateHandler}
+        loading={isLoading}
+      />
+    </Layout>
   );
 };
 

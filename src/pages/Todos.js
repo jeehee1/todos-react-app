@@ -1,4 +1,5 @@
 import TodosList from "../components/todos/TodosList";
+import Layout from '../components/layout/Layout'
 import { Fragment, useCallback, useEffect } from "react";
 import NewTodo from "../components/todos/NewTodo";
 import useHttp from "../hooks/http";
@@ -91,13 +92,13 @@ const Todos = (props) => {
   );
 
   return (
-    <Fragment>
+    <Layout>
       <NewTodo addTodo={addTodoHandler} />
       {loading && <p>Loading...</p>}
       {!loading && (
         <TodosList allTodos={todos} onDeleteTodo={deleteTodoHandler} />
       )}
-    </Fragment>
+    </Layout>
   );
 };
 
