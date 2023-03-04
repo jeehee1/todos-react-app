@@ -1,12 +1,21 @@
-.header {
-  width: 100%;
-  height: 6rem;
+.container {
+  padding: 0 1rem;
   display: flex;
-  padding: 1rem 2rem;
   justify-content: space-between;
   align-items: center;
-  background-color: #83abab;
+  height: 100%;
 }
+
+.navbar {
+  height: 60px;
+  background-color: #83abab;
+  position: relative;
+}
+
+.menu-icon{
+  display: none;
+}
+
 
 .logo {
   font: inherit;
@@ -15,49 +24,83 @@
   font-size: 2rem;
 }
 
-.nav ul {
-  list-style: none;
+
+.nav-elements ul {
   display: flex;
-  margin: 0;
-  padding: 0;
+  justify-content: space-between;
+  list-style-type: none;
 }
 
-.nav li {
-  font-weight: bold;
-  margin-left: 1rem;
-  padding: 1rem;
-  background-color: #5a7b7b;
-  border: solid 1px #5a7b7b;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95);
-  border-radius: 4px;
+.nav-elements ul li:not(:last-child) {
+  margin-right: 30px;
 }
 
-.nav a {
+.nav-elements ul a {
+  font: inherit;
   font-size: 1.1rem;
-  padding: 1rem;
-
+  font-weight: bold;
+  color: #392c5c;
   text-decoration: none;
-  color: #dbdbdb;
+}
+
+.nav-elements ul a.active {
+  color: #574c4c;
+  position: relative;
+}
+
+.nav-elements ul a.active::after{
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #574c4c;
 }
 
 .logout {
   border: none;
-  background-color: #5a7b7b;
-  color: #dbdbdb;
+  background: none;
   font-size: 1.1rem;
-  font: inherit;
+  font-weight: bold;
+  color: #8d4c14;
+  padding: 0;
 }
 
-.nav a:hover,
-.nav a:active,
-.logout:hover,
-.logout:active {
-    color: #9f9f9f;
-    cursor: pointer;
-}
-
-.nav li:active,
-.nav li:hover {
-  color: #9f9f9f;
+.logout:active,
+.logout:hover
+ {
+  color: #703807;
   cursor: pointer;
+ }
+@media (max-width: 600px) {
+  .menu-icon {
+    display: block;
+    cursor: pointer;
+  }
+
+  .nav-elements {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background-color: #83ababa6;
+    width: 0px;
+    transition: all 0.3s ease-out;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+ .nav-elements.active {
+  width: 180px;
+ }
+
+ .nav-elements ul {
+  display: flex;
+  flex-direction: column;
+ }
+
+ .nav-elements ul li {
+  margin-right: unset;
+  margin-top: 20px;
+}
 }

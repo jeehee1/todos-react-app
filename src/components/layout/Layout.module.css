@@ -1,5 +1,11 @@
+@media (max-width: 40px) {
+    .main {
+        width: 100%;
+        margin: 3rem auto;
+    }
+}
+
 .main {
-    background-image: none;
     width: 90%;
     max-width: 40rem;
     margin: 3rem auto;
