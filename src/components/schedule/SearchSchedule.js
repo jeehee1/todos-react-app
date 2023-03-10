@@ -15,9 +15,9 @@ const SearchSchedule = (props) => {
     <Card>
       <form onSubmit={submitSearchHandler}>
         <div className={classes.search}>
-        <label id="date">Search Date</label>
-        <input type="date" id="date" ref={dateRef} />
-        <button>Search</button>
+          <label id="date">Search Date</label>
+          <input type="date" id="date" ref={dateRef} />
+          <button>Search</button>
         </div>
       </form>
     </Card>

@@ -26,9 +26,24 @@
   border-radius: 4px;
 }
 
-.search button:hover, search button:active {
-    cursor: pointer;
-    background-color: #1d3f3f;
-    border: 1px solid #1d3f3f;
-    color: #eaeaea;
+.search button:hover,
+search button:active {
+  cursor: pointer;
+  background-color: #1d3f3f;
+  border: 1px solid #1d3f3f;
+  color: #eaeaea;
+}
+
+@media (max-width: 600px) {
+  .search {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  .search input {
+    display: block;
+    width: 100%;
+    margin: 1rem 0;
+  }
 }
