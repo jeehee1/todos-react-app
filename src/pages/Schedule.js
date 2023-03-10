@@ -74,18 +74,15 @@ const Schedule = (props) => {
     );
   };
 
-  const deleteScheduleHandler = useCallback(
-    (key) => {
-      sendRequest(
-        `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${user}/${selectedDate}/${key}.json`,
-        "DELETE",
-        null,
-        key,
-        "DELETE_SCHEDULE"
-      );
-    },
-    [sendRequest]
-  );
+  const deleteScheduleHandler = (key) => {
+    sendRequest(
+      `https://todos-project-a5fb8-default-rtdb.firebaseio.com/schedules/${user}/${selectedDate}/${key}.json`,
+      "DELETE",
+      null,
+      key,
+      "DELETE_SCHEDULE"
+    );
+  };
 
   useEffect(() => {
     if (identifier === "GET_SCHEDULES") {
