@@ -32,12 +32,9 @@ const dietReducer = (curDiet, action) => {
 const DailyDiet = (props) => {
   const authCtx = useContext(AuthContext);
   const user = authCtx.user;
-  console.log(user);
   const date = props.searchDate.substring(0, 10);
   const day = props.searchDate.substring(10, 13);
 
-  console.log("date");
-  console.log(date);
   const [diet, dispatch] = useReducer(dietReducer, []);
   const [showUpdate, setShowUpdate] = useState(false);
 

@@ -20,7 +20,7 @@ const WeeklyDiet = (props) => {
               setShowUpdateBtn(false);
             }}
             updateBtn={showUpdateBtn}
-            searchWeek={week}
+            // searchWeek={week}
             searchDate={date}
           />
         </li>
