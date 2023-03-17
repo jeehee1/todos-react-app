@@ -15,7 +15,7 @@ const SearchDiet = (props) => {
     <Card>
       <form className={classes.search} onSubmit={submitHandler}>
         <label htmlFor="week">Search week</label>
-        <input type="week" htmlFor="week" ref={searchWeek} />
+        <input id="week" type="week" ref={searchWeek} />
         <button>Search</button>
       </form>
     </Card>
