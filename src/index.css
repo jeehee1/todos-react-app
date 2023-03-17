@@ -12,3 +12,7 @@ body {
   background-color: #f5f7fd;
   background-image: none;
 }
+
+input {
+  -webkit-appearance: none;
+}

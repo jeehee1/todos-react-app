@@ -39,6 +39,7 @@ search button:active {
     display: block;
     text-align: center;
     width: 100%;
+    justify-content: center;
   }
 
   .search input {
