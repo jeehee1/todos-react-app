@@ -12,9 +12,3 @@ body {
   background-color: #f5f7fd;
   background-image: none;
 }
-
-input {
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  min-height: 1.2em;
-}
