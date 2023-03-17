@@ -73,6 +73,13 @@
   color: #703807;
   cursor: pointer;
  }
+
+ .logo:active,
+ .logo:hover {
+  cursor: pointer;
+ }
+
+ 
 @media (max-width: 600px) {
   .menu-icon {
     display: block;

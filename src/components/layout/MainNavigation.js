@@ -26,7 +26,7 @@ const MainNavigation = () => {
   return (
     <nav className={classes.navbar}>
       <div className={classes.container}>
-        <div className={classes.logo}>Planner</div>
+        <div className={classes.logo} onClick={() => {return navigate('/')}}>Planner</div>
         <div className={classes["menu-icon"]} onClick={showNavHandler}>
           <FontAwesomeIcon icon={faBars} />
         </div>
