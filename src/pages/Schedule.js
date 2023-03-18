@@ -138,11 +138,20 @@ const Schedule = (props) => {
           }}
         />
       )}
-      <DailySchedule
-        schedules={schedules}
-        onDeleteSchedule={deleteScheduleHandler}
-        isUpdating={update}
-      />
+      {!schedules && (
+        <div className={classes['no-schedule']}>
+        <p>
+          There is no schedule. Please press update button and add your
+          schedules.
+        </p></div>
+      )}
+      {schedules && (
+        <DailySchedule
+          schedules={schedules}
+          onDeleteSchedule={deleteScheduleHandler}
+          isUpdating={update}
+        />
+      )}
     </Layout>
   );
 };

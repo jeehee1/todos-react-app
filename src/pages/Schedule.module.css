@@ -1,5 +1,6 @@
 .info {
     display: block;
+    text-align: center;
 }
 .date {
   margin: 1rem;
@@ -23,4 +24,9 @@
     background-color: #3a1e12;
     border: 1px solid #3a1e12;
     cursor: pointer;
+}
+
+.no-schedule {
+    display: flex;
+    justify-content: center;
 }

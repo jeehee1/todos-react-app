@@ -14,7 +14,7 @@ const DailySchedule = (props) => {
       console.log(matchedTimeSchedule)
       matchedTimeSchedule.length > 0
         ? scheduleList.push(
-            <tr>
+            <tr key={matchedTimeSchedule.key}>
               <th>{`${i}:00`}</th>
               <td rowSpan={matchedTimeSchedule[0].end - matchedTimeSchedule[0].start}>
                 <p>{matchedTimeSchedule[0].schedule}</p>
