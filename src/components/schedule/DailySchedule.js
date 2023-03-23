@@ -10,9 +10,9 @@ const DailySchedule = (props) => {
       const matchedTimeSchedule = schedules.filter((data) => data.start === i);
       matchedTimeSchedule.length > 0
         ? scheduleList.push(
-            <tr key={matchedTimeSchedule.key}>
+            <tr>
               <th>{`${i}:00`}</th>
-              <td rowSpan={matchedTimeSchedule[0].end - matchedTimeSchedule[0].start}>
+              <td rowSpan={matchedTimeSchedule[0].end - matchedTimeSchedule[0].start} key={matchedTimeSchedule.key}>
                 <p>{matchedTimeSchedule[0].schedule}</p>
                 {props.isUpdating&&<button onClick={() => {props.onDeleteSchedule(matchedTimeSchedule[0].key)}}>delete</button>}
               </td>
