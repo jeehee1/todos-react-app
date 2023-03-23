@@ -147,7 +147,7 @@ const AuthForm = (props) => {
             {isLogin ? "Create New User" : "Login Page"}
           </Link>
           <button disabled={!formIsValid}>
-            {isLogin ? "Login" : props.loading ? "Sending..." : "Save"}
+            {isLogin ? "Login" : props.loading ? "Sending..." : "Sign Up"}
           </button>
         </div>
       </form>
