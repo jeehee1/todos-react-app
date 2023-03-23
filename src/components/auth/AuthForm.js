@@ -143,7 +143,7 @@ const AuthForm = (props) => {
             {isLogin ? "Login" : props.loading ? "Sending..." : "Sign Up"}
           </button>
         </div>
-      </form>s
+      </form>
     </Card>
   );
 };
