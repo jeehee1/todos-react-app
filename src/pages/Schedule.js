@@ -56,8 +56,6 @@ const Schedule = (props) => {
   const updateSchedulesHandler = (newSchedule) => {
     if (schedules) {
       for (const schedule of schedules) {
-        console.log(newSchedule.time);
-        console.log(schedule.time);
         const isDuplicated = isTimeDuplicated(newSchedule.time, schedule.time);
         if (isDuplicated) {
           alert("Time duplicated. Delete the schedule first.");
@@ -111,8 +109,6 @@ const Schedule = (props) => {
       }
     }
   }, [data, identifier, extra, setSchedules]);
-
-  console.log(schedules);
 
   return (
     <Layout>

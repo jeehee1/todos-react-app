@@ -57,7 +57,6 @@ const AuthForm = (props) => {
     const inputEmail = event.target.value;
     let emailIsValid;
     if (!inputEmail.includes("@") || inputEmail.trim().length < 4) {
-      console.log("Email must include @");
       emailIsValid = false;
     } else if (inputEmail.includes("@") && inputEmail.trim().length >= 4) {
       emailIsValid = true;
@@ -76,7 +75,6 @@ const AuthForm = (props) => {
     const inputPwd = event.target.value;
     let pwdIsValid;
     if (inputPwd.trim().length < 6) {
-      console.log("Enter your password");
       pwdIsValid = false;
       // setPwdIsValid(false);
     } else if (inputPwd.trim().length >= 6) {
@@ -98,11 +96,6 @@ const AuthForm = (props) => {
 
   const authenticateHandler = (event) => {
     event.preventDefault();
-    console.log({
-      email: inputState.emailValue,
-      password: inputState.pwdValue,
-      returnSecureToken: true,
-    });
     props.onAuthenticate({
       email: inputState.emailValue,
       password: inputState.pwdValue,
@@ -150,7 +143,7 @@ const AuthForm = (props) => {
             {isLogin ? "Login" : props.loading ? "Sending..." : "Sign Up"}
           </button>
         </div>
-      </form>
+      </form>s
     </Card>
   );
 };

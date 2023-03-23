@@ -8,7 +8,6 @@ const SearchSchedule = (props) => {
   const submitSearchHandler = (event) => {
     event.preventDefault();
     props.onGetSchedules(dateRef.current.value);
-    console.log(dateRef.current.value);
   };
 
   return (

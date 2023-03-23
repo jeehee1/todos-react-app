@@ -14,8 +14,6 @@ const UpdateSchedules = (props) => {
   const [selectedEndTime, setSelectedEndTime] = useState();
 
   const updateScheduleHandler = (event) => {
-    console.log(selectedStartTime);
-    console.log(selectedEndTime);
     event.preventDefault();
     const scheduleDetail = scheduleRef.current.value;
     if (selectedStartTime.value >= selectedEndTime.value) {
@@ -25,7 +23,6 @@ const UpdateSchedules = (props) => {
     for (let i = selectedStartTime.value; i < selectedEndTime.value; i++) {
       time.push(i);
     }
-    console.log(time);
     props.onUpdateSchedules({
       start: selectedStartTime.value,
       end: selectedEndTime.value,

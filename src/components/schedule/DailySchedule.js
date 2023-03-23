@@ -4,14 +4,10 @@ import { Fragment } from "react";
 const DailySchedule = (props) => {
   const scheduleList = [];
   const schedules = props.schedules;
-  console.log(schedules);
   
-
-
   for (let i = 0; i < 24; i++) {
     if (schedules) {
       const matchedTimeSchedule = schedules.filter((data) => data.start === i);
-      console.log(matchedTimeSchedule)
       matchedTimeSchedule.length > 0
         ? scheduleList.push(
             <tr key={matchedTimeSchedule.key}>
@@ -34,7 +30,6 @@ const DailySchedule = (props) => {
       </tr>);
     }
   }
-  console.log(scheduleList);
 
   return (
     <Fragment>

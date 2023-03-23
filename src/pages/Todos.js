@@ -42,7 +42,6 @@ const Todos = (props) => {
       dispatch({ type: "SET", todos: transformedTodos });
     }
     if (!loading && !error && identifier === "ADD_TODO") {
-      console.log(extra);
       dispatch({ type: "ADD", newTodo: { id: data.name, ...extra } });
     }
     if (!loading && !error && identifier === "REMOVE_TODO") {

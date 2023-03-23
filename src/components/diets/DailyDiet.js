@@ -122,7 +122,6 @@ const DailyDiet = (props) => {
     );
     setShowUpdate(false);
     props.onVisibleUpdateBtn();
-    console.log(diet);
   };
 
   const cancelUpdateHandler = () => {

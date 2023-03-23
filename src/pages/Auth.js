@@ -31,16 +31,12 @@ const Auth = () => {
           return res.json();
         } else {
           return res.json().then((data) => {
-            console.log("data when error occured");
-            console.log(data);
             let errorMessage = data.error.message || "Authnetication failed";
             throw new Error(errorMessage);
           });
         }
       })
       .then((data) => {
-        console.log("auth data");
-        console.log(data);
         isLoading = false;
         const expirationTime = new Date(
           new Date().getTime() + data.expiresIn * 1000

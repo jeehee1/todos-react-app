@@ -14,7 +14,6 @@ const MainNavigation = () => {
   const showNavHandler = () => {
     setShowNav(!showNav);
   };
-  console.log(showNav);
 
   const isLoggedIn = authCtx.isLoggedIn;
 

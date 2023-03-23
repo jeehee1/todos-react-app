@@ -49,7 +49,6 @@ const setUserReducer = (curUser, action) => {
 };
 
 export const AuthContextProvider = (props) => {
-  console.log("authContextProvider");
 
   const tokenData = retrieveStoredToken();
   let initialToken;
