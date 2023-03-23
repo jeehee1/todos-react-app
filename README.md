@@ -8,7 +8,7 @@ You can add your daily schedules in daily schedules page. Each schedules can be 
 #### Todo List
 You can register todo lists with date in which it should be finished. If the todo is done, it can be removed by clicking the todo.
 
-#### Diets
+#### Diet Plan
 You can add diet plan for every day every meal and update it.
 This should be a quick run through of why you made this project, it’s key goals, and why it might be helpful to whoever is reading this documentation. Keep it brief, but specific.
 
