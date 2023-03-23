@@ -31,7 +31,6 @@ const useHttp = () => {
 
   const sendRequest = useCallback(
     async (url, method, body, reqInfo, reqIdentifier) => {
-      console.log("send");
       dispatchHttp({ type: "SEND" });
       try {
         const response = await fetch(url, {
@@ -50,8 +49,6 @@ const useHttp = () => {
           return;
         }
         const data = await response.json();
-        console.log("response");
-        console.log(data);
         dispatchHttp({
           type: "RESPONSE",
           responseData: data,
